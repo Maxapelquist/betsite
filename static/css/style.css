@@ -1,0 +1,1335 @@
+body {
+  background-color: #083040;
+  color: #F2F2F2;
+  font-family: lato, sans-serif;
+  background-image: url(../../static/img/background-opacity.png);
+  background-repeat: no-repeat;
+  margin: 0 0.5rem;
+}
+@media (min-width: 768px) {
+  body {
+    margin: 0 3rem;
+  }
+}
+.modal-dialog-slideout-right {
+    transform: translateX(100%);
+    margin: 0;
+    width: 25%; /* Justera bredden efter behov */
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal.fade.show .modal-dialog-slideout-right {
+    transform: translateX(0);
+}
+
+body header {
+  padding: 0 15px;
+}
+body header .navbar {
+  padding: 2rem 0;
+}
+@media (max-width: 990px) {
+  body header .navbar {
+    padding: 1rem 0;
+  }
+}
+body header .navbar .navbar-brand .brand-logo {
+  max-width: 200px;
+}
+.nav-link img {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+.nav-link.active img {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 540px) {
+  body header .navbar .navbar-brand .brand-logo {
+    width: 150px;
+  }
+}
+body header .navbar .navbar-toggler {
+  border: none;
+}
+body header .navbar .navbar-toggler:focus {
+  outline: none;
+}
+body header .navbar .navbar-toggler .navbar-toggler-icon {
+  background-image: url(../../assets/img/open-menu.png);
+  width: 1.2rem;
+  height: 1.2rem;
+}
+body header .navbar .btn-search {
+  margin: 0;
+}
+body header .navbar .btn-search:focus {
+  box-shadow: none;
+}
+body header .navbar .btn-search .fa-search {
+  color: #F2F2F2;
+}
+body header .navbar .modal .modal-dialog .modal-content {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #F2F2F2;
+  border-radius: 0;
+}
+body header .navbar .modal .modal-dialog .modal-content .form-inline .form-control {
+  background-color: transparent;
+  border: none;
+  color: #F2F2F2;
+}
+body header .navbar .modal .modal-dialog .modal-content .form-inline .form-control:focus {
+  box-shadow: none;
+}
+body header .navbar .modal .modal-dialog .modal-content .form-inline .form-control::placeholder {
+  color: #F2F2F2;
+}
+body header .navbar .navbar-nav .nav-item .nav-link {
+  color: #F2F2F2;
+  padding: 0 2rem;
+  font-size: 1rem;
+}
+@media (max-width: 990px) {
+  body header .navbar .navbar-nav .nav-item {
+    margin-top: 1rem;
+  }
+  body header .navbar .navbar-nav .nav-item .nav-link {
+    padding: 0;
+  }
+}
+body .gallery {
+  position: relative;
+}
+body .gallery .gallery-container {
+  align-items: center;
+  display: flex;
+  height: 600px;
+  margin: 0 auto;
+  position: relative;
+  max-width: 1200px;
+}
+body .gallery .gallery-container .card {
+  background-color: #F2F2F2;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 3px 6px 0 #129a86;
+  padding: 2rem;
+}
+body .gallery .gallery-container .card .card-header {
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  padding: 0;
+  margin-bottom: 1.25rem;
+}
+body .gallery .gallery-container .card .card-header .time {
+  color: #1A404F;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+body .gallery .gallery-container .card .card-header .day {
+  color: #1A404F;
+  font-weight: lighter;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+body .gallery .gallery-container .card .card-header .teams-logo {
+  position: relative;
+}
+body .gallery .gallery-container .card .card-header .teams-logo .team-logo-item {
+  overflow: hidden;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid #CDCBCB;
+  display: inline-block;
+  text-align: center;
+  padding-top: 4px;
+  background-color: #fff;
+}
+body .gallery .gallery-container .card .card-header .teams-logo .team-logo-item.host-team {
+  position: absolute;
+  left: -45px;
+  z-index: 2;
+}
+body .gallery .gallery-container .card .card-header .teams-logo .team-logo-item .team-logo-img {
+  height: 50px;
+  width: 50px;
+}
+body .gallery .gallery-container .card .card-body {
+  padding: 0;
+  margin-bottom: 1.25rem;
+}
+body .gallery .gallery-container .card .card-body .team {
+  max-width: 350px;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px 0 #CDCBCB;
+}
+body .gallery .gallery-container .card .card-body .top-game {
+  text-transform: uppercase;
+  color: #CDCBCB;
+  font-size: 1rem;
+}
+body .gallery .gallery-container .card .card-body .score .team-name, body .gallery .gallery-container .card .card-body .score .score-value {
+  color: #1A404F;
+  font-size: 1.56rem;
+}
+body .gallery .gallery-container .card .card-body .score :first-child .team-name, body .gallery .gallery-container .card .card-body .score :first-child .score-value {
+  font-weight: lighter;
+}
+body .gallery .gallery-container .card .card-footer {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+body .gallery .gallery-container .card .card-footer .home-win .simple-odd-value, body .gallery .gallery-container .card .card-footer .draw .simple-odd-value, body .gallery .gallery-container .card .card-footer .away-win .simple-odd-value {
+  font-weight: bold;
+  margin-left: 1rem;
+}
+body .gallery .gallery-container .card .card-footer .home-win .btn-success, body .gallery .gallery-container .card .card-footer .home-win .btn-secondary, body .gallery .gallery-container .card .card-footer .home-win .btn-danger, body .gallery .gallery-container .card .card-footer .draw .btn-success, body .gallery .gallery-container .card .card-footer .draw .btn-secondary, body .gallery .gallery-container .card .card-footer .draw .btn-danger, body .gallery .gallery-container .card .card-footer .away-win .btn-success, body .gallery .gallery-container .card .card-footer .away-win .btn-secondary, body .gallery .gallery-container .card .card-footer .away-win .btn-danger {
+  background-color: #fff;
+  border-radius: 15px;
+  font-size: 1.25rem;
+  min-width: 7rem;
+  padding: 0.375rem 0.65rem !important;
+}
+body .gallery .gallery-container .card .card-footer .home-win .btn-success:focus, body .gallery .gallery-container .card .card-footer .home-win .btn-secondary:focus, body .gallery .gallery-container .card .card-footer .home-win .btn-danger:focus, body .gallery .gallery-container .card .card-footer .draw .btn-success:focus, body .gallery .gallery-container .card .card-footer .draw .btn-secondary:focus, body .gallery .gallery-container .card .card-footer .draw .btn-danger:focus, body .gallery .gallery-container .card .card-footer .away-win .btn-success:focus, body .gallery .gallery-container .card .card-footer .away-win .btn-secondary:focus, body .gallery .gallery-container .card .card-footer .away-win .btn-danger:focus {
+  box-shadow: none;
+}
+body .gallery .gallery-container .card .card-footer .home-win .btn-success, body .gallery .gallery-container .card .card-footer .draw .btn-success, body .gallery .gallery-container .card .card-footer .away-win .btn-success {
+  color: #129A86;
+  border-color: #129A86;
+}
+body .gallery .gallery-container .card .card-footer .home-win .btn-secondary, body .gallery .gallery-container .card .card-footer .draw .btn-secondary, body .gallery .gallery-container .card .card-footer .away-win .btn-secondary {
+  color: #CDCBCB;
+  border-color: #CDCBCB;
+}
+body .gallery .gallery-container .card .card-footer .home-win .btn-secondary .simple-odd-value, body .gallery .gallery-container .card .card-footer .draw .btn-secondary .simple-odd-value, body .gallery .gallery-container .card .card-footer .away-win .btn-secondary .simple-odd-value {
+  color: black;
+}
+body .gallery .gallery-container .card .card-footer .home-win .btn-danger, body .gallery .gallery-container .card .card-footer .draw .btn-danger, body .gallery .gallery-container .card .card-footer .away-win .btn-danger {
+  color: #dc3545;
+}
+body .gallery .gallery-container .card.gallery-item-previous .card-header .time, body .gallery .gallery-container .card.gallery-item-next .card-header .time {
+  font-size: 1.7rem;
+}
+body .gallery .gallery-container .card.gallery-item-previous .card-header .day, body .gallery .gallery-container .card.gallery-item-next .card-header .day {
+  font-size: 1.1rem;
+}
+body .gallery .gallery-container .card.gallery-item-previous .card-header .teams-logo .team-logo-item, body .gallery .gallery-container .card.gallery-item-next .card-header .teams-logo .team-logo-item {
+  width: 50px;
+  height: 50px;
+}
+body .gallery .gallery-container .card.gallery-item-previous .card-header .teams-logo .team-logo-item.host-team, body .gallery .gallery-container .card.gallery-item-next .card-header .teams-logo .team-logo-item.host-team {
+  left: -35px;
+}
+body .gallery .gallery-container .card.gallery-item-previous .card-header .teams-logo .team-logo-item .team-logo-img, body .gallery .gallery-container .card.gallery-item-next .card-header .teams-logo .team-logo-item .team-logo-img {
+  width: 40px;
+  height: 40px;
+}
+body .gallery .gallery-container .card.gallery-item-previous .card-body .score .team-name, body .gallery .gallery-container .card.gallery-item-previous .card-body .score .score-value, body .gallery .gallery-container .card.gallery-item-next .card-body .score .team-name, body .gallery .gallery-container .card.gallery-item-next .card-body .score .score-value {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+body .gallery .gallery-container .card.gallery-item-previous .card-footer .home-win .btn-success, body .gallery .gallery-container .card.gallery-item-previous .card-footer .home-win .btn-secondary, body .gallery .gallery-container .card.gallery-item-previous .card-footer .home-win .btn-danger, body .gallery .gallery-container .card.gallery-item-previous .card-footer .draw .btn-success, body .gallery .gallery-container .card.gallery-item-previous .card-footer .draw .btn-secondary, body .gallery .gallery-container .card.gallery-item-previous .card-footer .draw .btn-danger, body .gallery .gallery-container .card.gallery-item-previous .card-footer .away-win .btn-success, body .gallery .gallery-container .card.gallery-item-previous .card-footer .away-win .btn-secondary, body .gallery .gallery-container .card.gallery-item-previous .card-footer .away-win .btn-danger, body .gallery .gallery-container .card.gallery-item-next .card-footer .home-win .btn-success, body .gallery .gallery-container .card.gallery-item-next .card-footer .home-win .btn-secondary, body .gallery .gallery-container .card.gallery-item-next .card-footer .home-win .btn-danger, body .gallery .gallery-container .card.gallery-item-next .card-footer .draw .btn-success, body .gallery .gallery-container .card.gallery-item-next .card-footer .draw .btn-secondary, body .gallery .gallery-container .card.gallery-item-next .card-footer .draw .btn-danger, body .gallery .gallery-container .card.gallery-item-next .card-footer .away-win .btn-success, body .gallery .gallery-container .card.gallery-item-next .card-footer .away-win .btn-secondary, body .gallery .gallery-container .card.gallery-item-next .card-footer .away-win .btn-danger {
+  font-size: 1.2rem;
+  min-width: 6rem;
+}
+body .gallery .gallery-container .card.gallery-item-first .card-header, body .gallery .gallery-container .card.gallery-item-last .card-header {
+  margin-bottom: 0.5rem;
+}
+body .gallery .gallery-container .card.gallery-item-first .card-header .time, body .gallery .gallery-container .card.gallery-item-last .card-header .time {
+  font-size: 1.5rem;
+}
+body .gallery .gallery-container .card.gallery-item-first .card-header .day, body .gallery .gallery-container .card.gallery-item-last .card-header .day {
+  font-size: 0.9rem;
+}
+body .gallery .gallery-container .card.gallery-item-first .card-header .teams-logo .team-logo-item, body .gallery .gallery-container .card.gallery-item-last .card-header .teams-logo .team-logo-item {
+  width: 40px;
+  height: 40px;
+}
+body .gallery .gallery-container .card.gallery-item-first .card-header .teams-logo .team-logo-item.host-team, body .gallery .gallery-container .card.gallery-item-last .card-header .teams-logo .team-logo-item.host-team {
+  left: -25px;
+}
+body .gallery .gallery-container .card.gallery-item-first .card-header .teams-logo .team-logo-item .team-logo-img, body .gallery .gallery-container .card.gallery-item-last .card-header .teams-logo .team-logo-item .team-logo-img {
+  width: 30px;
+  height: 30px;
+}
+body .gallery .gallery-container .card.gallery-item-first .card-body .score .team-name, body .gallery .gallery-container .card.gallery-item-first .card-body .score .score-value, body .gallery .gallery-container .card.gallery-item-last .card-body .score .team-name, body .gallery .gallery-container .card.gallery-item-last .card-body .score .score-value {
+  font-size: 1rem;
+  margin-bottom: 0.6rem;
+}
+body .gallery .gallery-container .card.gallery-item-first .card-footer .home-win .btn-success, body .gallery .gallery-container .card.gallery-item-first .card-footer .home-win .btn-secondary, body .gallery .gallery-container .card.gallery-item-first .card-footer .home-win .btn-danger, body .gallery .gallery-container .card.gallery-item-first .card-footer .draw .btn-success, body .gallery .gallery-container .card.gallery-item-first .card-footer .draw .btn-secondary, body .gallery .gallery-container .card.gallery-item-first .card-footer .draw .btn-danger, body .gallery .gallery-container .card.gallery-item-first .card-footer .away-win .btn-success, body .gallery .gallery-container .card.gallery-item-first .card-footer .away-win .btn-secondary, body .gallery .gallery-container .card.gallery-item-first .card-footer .away-win .btn-danger, body .gallery .gallery-container .card.gallery-item-last .card-footer .home-win .btn-success, body .gallery .gallery-container .card.gallery-item-last .card-footer .home-win .btn-secondary, body .gallery .gallery-container .card.gallery-item-last .card-footer .home-win .btn-danger, body .gallery .gallery-container .card.gallery-item-last .card-footer .draw .btn-success, body .gallery .gallery-container .card.gallery-item-last .card-footer .draw .btn-secondary, body .gallery .gallery-container .card.gallery-item-last .card-footer .draw .btn-danger, body .gallery .gallery-container .card.gallery-item-last .card-footer .away-win .btn-success, body .gallery .gallery-container .card.gallery-item-last .card-footer .away-win .btn-secondary, body .gallery .gallery-container .card.gallery-item-last .card-footer .away-win .btn-danger {
+  font-size: 1rem;
+  min-width: 5rem;
+}
+body .gallery .gallery-container .gallery-item-first.card, body .gallery .gallery-container .gallery-item-last.card {
+  padding: 1.5rem 2rem;
+}
+body .gallery .gallery-container .gallery-item-first.card .team, body .gallery .gallery-container .gallery-item-last.card .team {
+  width: 270px;
+}
+body .gallery .gallery-container .gallery-item-first.card .top-game, body .gallery .gallery-container .gallery-item-last.card .top-game {
+  font-size: 0.8rem;
+  margin-bottom: 0.1rem;
+}
+body .gallery .gallery-controls {
+  display: block;
+}
+body .gallery .gallery-controls .gallery-controls-previous, body .gallery .gallery-controls .gallery-controls-next {
+  background-color: transparent;
+  color: #21C299;
+  font-size: 1.5rem;
+}
+body .gallery .gallery-controls .gallery-controls-previous:before, body .gallery .gallery-controls .gallery-controls-next:before {
+  display: none;
+}
+body .gallery .gallery-controls .gallery-controls-previous {
+  position: absolute;
+  left: -3%;
+  top: calc(50% - 0.75rem);
+}
+body .gallery .gallery-controls .gallery-controls-next {
+  position: absolute;
+  right: -3%;
+  top: calc(50% - 0.75rem);
+}
+body #galleryFadeMobile {
+  margin-bottom: 30px;
+}
+@media (min-width: 540px) {
+  body #galleryFadeMobile .carousel-inner {
+    min-width: 400px;
+  }
+}
+body #galleryFadeMobile .carousel-inner .card {
+  background-color: #F2F2F2;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 3px 6px 0 #129a86;
+  padding: 1rem;
+}
+body #galleryFadeMobile .carousel-inner .card .card-header {
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+body #galleryFadeMobile .carousel-inner .card .card-header .time {
+  color: #1A404F;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0;
+}
+@media (min-width: 540px) {
+  body #galleryFadeMobile .carousel-inner .card .card-header .time {
+    font-size: 1.5rem;
+  }
+}
+body #galleryFadeMobile .carousel-inner .card .card-header .day {
+  color: #1A404F;
+  font-weight: lighter;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+@media (min-width: 540px) {
+  body #galleryFadeMobile .carousel-inner .card .card-header .day {
+    font-size: 1rem;
+  }
+}
+body #galleryFadeMobile .carousel-inner .card .card-header .teams-logo {
+  position: relative;
+}
+body #galleryFadeMobile .carousel-inner .card .card-header .teams-logo .team-logo-item {
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #CDCBCB;
+  display: inline-block;
+  text-align: center;
+  padding-top: 4px;
+  background-color: #fff;
+}
+@media (min-width: 540px) {
+  body #galleryFadeMobile .carousel-inner .card .card-header .teams-logo .team-logo-item {
+    width: 60px;
+    height: 60px;
+  }
+}
+body #galleryFadeMobile .carousel-inner .card .card-header .teams-logo .team-logo-item.host-team {
+  position: absolute;
+  left: -30px;
+  z-index: 2;
+}
+@media (min-width: 540px) {
+  body #galleryFadeMobile .carousel-inner .card .card-header .teams-logo .team-logo-item.host-team {
+    left: -45px;
+  }
+}
+body #galleryFadeMobile .carousel-inner .card .card-header .teams-logo .team-logo-item .team-logo-img {
+  height: 30px;
+  width: 30px;
+}
+@media (min-width: 540px) {
+  body #galleryFadeMobile .carousel-inner .card .card-header .teams-logo .team-logo-item .team-logo-img {
+    width: 50px;
+    height: 50px;
+  }
+}
+body #galleryFadeMobile .carousel-inner .card .card-body {
+  padding: 0;
+  margin-bottom: 0;
+}
+body #galleryFadeMobile .carousel-inner .card .card-body .team {
+  max-width: 250px;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px 0 #CDCBCB;
+}
+@media (min-width: 540px) {
+  body #galleryFadeMobile .carousel-inner .card .card-body .team {
+    min-width: calc(400px - 2rem);
+  }
+}
+body #galleryFadeMobile .carousel-inner .card .card-body .top-game {
+  text-transform: uppercase;
+  color: #CDCBCB;
+  font-size: 0.8rem;
+}
+body #galleryFadeMobile .carousel-inner .card .card-body .score .team-name, body #galleryFadeMobile .carousel-inner .card .card-body .score .score-value {
+  color: #1A404F;
+  font-size: 1.3rem;
+}
+@media (min-width: 540px) {
+  body #galleryFadeMobile .carousel-inner .card .card-body .score .team-name, body #galleryFadeMobile .carousel-inner .card .card-body .score .score-value {
+    font-size: 1.5rem;
+  }
+}
+body #galleryFadeMobile .carousel-inner .card .card-body .score :first-child .team-name, body #galleryFadeMobile .carousel-inner .card .card-body .score :first-child .score-value {
+  font-weight: lighter;
+}
+body #galleryFadeMobile .carousel-inner .card .card-footer {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+body #galleryFadeMobile .carousel-inner .card .card-footer .home-win, body #galleryFadeMobile .carousel-inner .card .card-footer .draw {
+  margin-right: 0.5rem;
+}
+body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .simple-odd-value, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .simple-odd-value, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .simple-odd-value {
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-success, body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-secondary, body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-danger, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-success, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-secondary, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-danger, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-success, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-secondary, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-danger {
+  background-color: #fff;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  width: 5rem;
+}
+@media (min-width: 540px) {
+  body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-success, body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-secondary, body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-danger, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-success, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-secondary, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-danger, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-success, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-secondary, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-danger {
+    min-width: 6rem;
+    font-size: 1rem;
+  }
+}
+body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-success:focus, body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-secondary:focus, body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-danger:focus, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-success:focus, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-secondary:focus, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-danger:focus, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-success:focus, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-secondary:focus, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-danger:focus {
+  box-shadow: none;
+}
+body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-success, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-success, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-success {
+  color: #129A86;
+  border-color: #129A86;
+}
+body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-secondary, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-secondary, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-secondary {
+  color: #CDCBCB;
+  border-color: #CDCBCB;
+}
+body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-secondary .simple-odd-value, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-secondary .simple-odd-value, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-secondary .simple-odd-value {
+  color: black;
+}
+body #galleryFadeMobile .carousel-inner .card .card-footer .home-win .btn-danger, body #galleryFadeMobile .carousel-inner .card .card-footer .draw .btn-danger, body #galleryFadeMobile .carousel-inner .card .card-footer .away-win .btn-danger {
+  color: #dc3545;
+}
+body #galleryFadeMobile .carousel-control-next {
+  right: -1.6rem;
+  opacity: 1;
+}
+@media (min-width: 375px) and (max-width: 540px) {
+  body #galleryFadeMobile .carousel-control-next {
+    right: -2.5rem;
+  }
+}
+@media (min-width: 540px) and (max-width: 650px) {
+  body #galleryFadeMobile .carousel-control-next {
+    right: -5rem;
+  }
+}
+@media (min-width: 650px) {
+  body #galleryFadeMobile .carousel-control-next {
+    right: -8rem;
+  }
+}
+body #galleryFadeMobile .carousel-control-next .carousel-control-next-icon {
+  background-image: url(../../assets/img/icon-awesome-angle-right.svg);
+  width: 30px;
+  height: 30px;
+}
+@media (max-width: 600px) {
+  body #galleryFadeMobile .carousel-control-next .carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+body #galleryFadeMobile .carousel-control-prev {
+  left: -1.6rem;
+  opacity: 1;
+}
+@media (min-width: 375px) and (max-width: 540px) {
+  body #galleryFadeMobile .carousel-control-prev {
+    left: -2.5rem;
+  }
+}
+@media (min-width: 540px) and (max-width: 650px) {
+  body #galleryFadeMobile .carousel-control-prev {
+    left: -5rem;
+  }
+}
+@media (min-width: 650px) {
+  body #galleryFadeMobile .carousel-control-prev {
+    left: -8rem;
+  }
+}
+body #galleryFadeMobile .carousel-control-prev .carousel-control-prev-icon {
+  background-image: url(../../assets/img/icon-awesome-angle-left.svg);
+  width: 30px;
+  height: 30px;
+}
+@media (max-width: 600px) {
+  body #galleryFadeMobile .carousel-control-prev .carousel-control-prev-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+body .btn-sign-in {
+  border-color: #1DA885;
+  color: #1DA885;
+  border-radius: 25px;
+  border-width: 2px;
+  padding: 0.5rem 2rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 540px) {
+  body .btn-sign-in {
+    font-size: 1.56rem;
+  }
+}
+body .btn-sign-in:hover {
+  color: #F2F2F2;
+  background-color: #1DA885;
+  transition: all 0.8s ease-in-out;
+}
+body .btn-sign-in:focus {
+  box-shadow: none;
+}
+body .bookmaker-board {
+  background-color: #1A404F;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 3rem 6rem rgba(1, 3, 38, 0.5);
+  margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+  body .bookmaker-board {
+    padding: 1rem;
+  }
+}
+body .bookmaker-board .nav-pills {
+  border-bottom: 1px solid #1DA885;
+  padding-bottom: 1rem;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+body .bookmaker-board .nav-pills::-webkit-scrollbar {
+  display: none;
+}
+body .bookmaker-board .nav-pills .nav-item {
+  margin-right: 1rem;
+}
+@media (max-width: 600px) {
+  body .bookmaker-board .nav-pills .nav-item {
+    margin-right: 0.2rem;
+  }
+}
+body .bookmaker-board .nav-pills .nav-item .nav-link {
+  color: #F2F2F2;
+  font-size: 1.875rem;
+  padding: 0.5rem;
+}
+@media (max-width: 600px) {
+  body .bookmaker-board .nav-pills .nav-item .nav-link {
+    font-size: 1.1rem;
+  }
+}
+body .bookmaker-board .nav-pills .nav-item .nav-link .fa-futbol, body .bookmaker-board .nav-pills .nav-item .nav-link .fa-basketball-ball, body .bookmaker-board .nav-pills .nav-item .nav-link .fa-volleyball-ball, body .bookmaker-board .nav-pills .nav-item .nav-link .fa-hockey-puck,
+body .bookmaker-board .nav-pills .nav-item .nav-link .fa-chess-knight, body .bookmaker-board .nav-pills .nav-item .nav-link .fa-football-ball, body .bookmaker-board .nav-pills .nav-item .nav-link .fa-tennis-ball, body .bookmaker-board .nav-pills .nav-item .nav-link .fa-headset {
+  display: block;
+}
+body .bookmaker-board .nav-pills .nav-item .nav-link .sport-logo-img {
+  display: none;
+}
+body .bookmaker-board .nav-pills .nav-item .nav-link.active {
+  background-color: #1DA885;
+  box-shadow: 0 0 10px #198F71;
+  border-radius: 10px !important;
+}
+body .bookmaker-board .nav-pills .nav-item .nav-link.active .fa-futbol, body .bookmaker-board .nav-pills .nav-item .nav-link.active .fa-basketball-ball, body .bookmaker-board .nav-pills .nav-item .nav-link.active .fa-volleyball-ball, body .bookmaker-board .nav-pills .nav-item .nav-link.active .fa-hockey-puck,
+body .bookmaker-board .nav-pills .nav-item .nav-link.active .fa-chess-knight, body .bookmaker-board .nav-pills .nav-item .nav-link.active .fa-football-ball, body .bookmaker-board .nav-pills .nav-item .nav-link.active .fa-tennis-ball, body .bookmaker-board .nav-pills .nav-item .nav-link.active .fa-headset {
+  display: none;
+}
+body .bookmaker-board .nav-pills .nav-item .nav-link.active .sport-logo-img {
+  display: block;
+  height: 30px;
+  width: 30px;
+}
+@media (max-width: 600px) {
+  body .bookmaker-board .nav-pills .nav-item .nav-link.active .sport-logo-img {
+    height: 1.1rem;
+    width: 1.1rem;
+  }
+}
+body .bookmaker-board .tab-content .tab-pane .table {
+  width: 100%;
+  margin-bottom: 0;
+}
+body .bookmaker-board .tab-content .tab-pane .table thead {
+  padding: 0;
+}
+body .bookmaker-board .tab-content .tab-pane .table thead th {
+  padding: 0;
+  border: none;
+  color: #F2F2F2;
+  font-size: 0.7rem;
+}
+body .bookmaker-board .tab-content .tab-pane .table tbody tr:nth-child(odd) td {
+  background-color: #062633;
+}
+body .bookmaker-board .tab-content .tab-pane .table tbody tr td {
+  padding: 1rem 0;
+  border: none;
+  text-align: center;
+  vertical-align: middle;
+}
+body .bookmaker-board .tab-content .tab-pane .table tbody tr td:first-child {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+body .bookmaker-board .tab-content .tab-pane .table tbody tr td:last-child {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+@media (max-width: 768px) {
+  body .bookmaker-board .tab-content .tab-pane .table tbody tr td:nth-of-type(6) {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}
+@media (min-width: 990px) and (max-width: 1200px) {
+  body .bookmaker-board .tab-content .tab-pane .table tbody tr td:nth-of-type(6) {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}
+@media (max-width: 1024px) {
+  body .bookmaker-board .tab-content .tab-pane .table tbody tr td:nth-of-type(3) {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+}
+@media (min-width: 1200px) and (max-width: 1330px) {
+  body .bookmaker-board .tab-content .tab-pane .table tbody tr td:nth-of-type(7) {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}
+body .bookmaker-board .tab-content .tab-pane .table .date-time-container .time {
+  color: #F2F2F2;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  margin-left: 1rem;
+}
+body .bookmaker-board .tab-content .tab-pane .table .date-time-container .date {
+  color: #F2F2F2;
+  font-weight: lighter;
+  font-size: 0.8rem;
+  margin-bottom: 0;
+  margin-left: 1rem;
+}
+@media (max-width: 1024px) {
+  body .bookmaker-board .tab-content .tab-pane .table .date-time-container {
+    display: none;
+  }
+}
+body .bookmaker-board .tab-content .tab-pane .teams-logo {
+  position: relative;
+}
+@media (max-width: 1030px) {
+  body .bookmaker-board .tab-content .tab-pane .teams-logo {
+    display: none;
+  }
+}
+body .bookmaker-board .tab-content .tab-pane .teams-logo .team-logo-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #CDCBCB;
+  display: inline-block;
+  text-align: center;
+  padding-top: 4px;
+  background-color: #fff;
+}
+body .bookmaker-board .tab-content .tab-pane .teams-logo .team-logo-item.host-team {
+  z-index: 2;
+  position: relative;
+  left: 10px;
+}
+body .bookmaker-board .tab-content .tab-pane .teams-logo .team-logo-item .team-logo-img {
+  height: 30px;
+  width: 30px;
+}
+body .bookmaker-board .tab-content .tab-pane .playing-teams {
+  font-size: 0.85rem;
+}
+@media (max-width: 1024px) {
+  body .bookmaker-board .tab-content .tab-pane .playing-teams {
+    padding-left: 0.3rem !important;
+  }
+}
+body .bookmaker-board .tab-content .tab-pane .playing-teams .score:last-of-type, body .bookmaker-board .tab-content .tab-pane .playing-teams .playing-time:last-of-type {
+  border-right: 1px solid #F2F2F2;
+  padding-right: 0.8rem;
+}
+@media (max-width: 520px) {
+  body .bookmaker-board .tab-content .tab-pane .playing-teams .score, body .bookmaker-board .tab-content .tab-pane .playing-teams .playing-time {
+    font-size: 0.625rem;
+  }
+}
+@media (min-width: 520px) and (max-width: 990px) {
+  body .bookmaker-board .tab-content .tab-pane .playing-teams .score, body .bookmaker-board .tab-content .tab-pane .playing-teams .playing-time {
+    font-size: 0.8rem;
+  }
+}
+body .bookmaker-board .tab-content .tab-pane .playing-teams .score .team-name, body .bookmaker-board .tab-content .tab-pane .playing-teams .score .score-value, body .bookmaker-board .tab-content .tab-pane .playing-teams .playing-time .team-name, body .bookmaker-board .tab-content .tab-pane .playing-teams .playing-time .score-value {
+  color: #F2F2F2;
+  font-weight: lighter;
+}
+body .bookmaker-board .tab-content .tab-pane .playing-teams .score .team-name.winner, body .bookmaker-board .tab-content .tab-pane .playing-teams .score .score-value.winner, body .bookmaker-board .tab-content .tab-pane .playing-teams .playing-time .team-name.winner, body .bookmaker-board .tab-content .tab-pane .playing-teams .playing-time .score-value.winner {
+  font-weight: bold;
+}
+body .bookmaker-board .tab-content .tab-pane .playing-teams .score .team-name, body .bookmaker-board .tab-content .tab-pane .playing-teams .playing-time .team-name {
+  margin-left: 1rem;
+}
+@media (max-width: 1024px) {
+  body .bookmaker-board .tab-content .tab-pane .playing-teams .score .team-name, body .bookmaker-board .tab-content .tab-pane .playing-teams .playing-time .team-name {
+    margin-left: 0;
+  }
+}
+@media (max-width: 768px) {
+  body .bookmaker-board .tab-content .tab-pane .handicap, body .bookmaker-board .tab-content .tab-pane .over, body .bookmaker-board .tab-content .tab-pane .under {
+    display: none;
+  }
+}
+@media (min-width: 990px) and (max-width: 1200px) {
+  body .bookmaker-board .tab-content .tab-pane .handicap, body .bookmaker-board .tab-content .tab-pane .over, body .bookmaker-board .tab-content .tab-pane .under {
+    display: none;
+  }
+}
+@media (min-width: 990px) and (max-width: 1332px) {
+  body .bookmaker-board .tab-content .tab-pane .over, body .bookmaker-board .tab-content .tab-pane .under {
+    display: none;
+  }
+}
+@media (max-width: 520px) {
+  body .bookmaker-board .tab-content .tab-pane .simple-bet {
+    padding: 0.8rem 0.2rem !important;
+  }
+}
+body .bookmaker-board .tab-content .tab-pane .btn-price {
+  background-color: #F2F2F2;
+  color: #083040;
+  width: 4rem;
+  padding: 0.6rem 0;
+  border-radius: 15px;
+  border: 1px solid transparent;
+  font-weight: bold;
+}
+@media (max-width: 990px) {
+  body .bookmaker-board .tab-content .tab-pane .btn-price {
+    width: 3rem;
+    font-size: 0.8rem;
+    border-right: 5px;
+    padding: 0.7rem 0;
+  }
+}
+@media (min-width: 520px) and (max-width: 768px) {
+  body .bookmaker-board .tab-content .tab-pane .btn-price {
+    width: 4rem;
+  }
+}
+body .bookmaker-board .tab-content .tab-pane .btn-price.active {
+  box-shadow: none;
+  background-color: #21C299;
+  color: #F2F2F2;
+}
+body .bookmaker-board .tab-content .tab-pane .btn-price:hover {
+  border: 1px solid #21C299;
+  box-shadow: inset 0 0 10px 0 #21C299;
+}
+body .bookmaker-board .tab-content .tab-pane .btn-unalienable, body .bookmaker-board .tab-content .tab-pane .btn-lock {
+  background-color: #F2F2F2;
+  color: grey;
+  width: 4rem;
+  padding: 0.6rem 0;
+  border-radius: 15px;
+  border: 1px solid transparent;
+  font-weight: bold;
+}
+@media (max-width: 990px) {
+  body .bookmaker-board .tab-content .tab-pane .btn-unalienable, body .bookmaker-board .tab-content .tab-pane .btn-lock {
+    width: 3rem;
+    font-size: 0.8rem;
+    border-right: 5px;
+    padding: 0.7rem 0;
+  }
+}
+@media (min-width: 520px) and (max-width: 768px) {
+  body .bookmaker-board .tab-content .tab-pane .btn-unalienable, body .bookmaker-board .tab-content .tab-pane .btn-lock {
+    width: 4rem;
+  }
+}
+body .bookmaker-board .tab-content .tab-pane .btn-unalienable:focus, body .bookmaker-board .tab-content .tab-pane .btn-lock:focus {
+  box-shadow: none;
+}
+body .bookmaker-board .tab-content .tab-pane .btn-sort {
+  padding: 0;
+  color: #21C299;
+}
+body .bookmaker-board .tab-content .tab-pane .btn-sort:focus {
+  box-shadow: none;
+}
+body .sport-sidebar {
+  z-index: 3;
+}
+@media (max-width: 990px) {
+  body .sport-sidebar {
+    margin-bottom: 1rem;
+  }
+}
+body .sport-sidebar .sidebar {
+  padding: 1rem;
+  background-color: #1A404F;
+  border-radius: 20px;
+  transition: all 0.2s;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+@media (min-width: 990px) {
+  body .sport-sidebar .sidebar {
+    width: 5rem;
+  }
+}
+body .sport-sidebar .sidebar .sidebar-toggle {
+  color: #21C299;
+  font-size: 2rem;
+  padding: 0;
+  margin-left: 0.5rem;
+  text-align: left;
+}
+body .sport-sidebar .sidebar .sidebar-toggle:focus {
+  outline: none;
+  box-shadow: none;
+}
+body .sport-sidebar .sidebar .nav-item {
+  margin: 0.7rem 0;
+}
+@media (max-width: 520px) {
+  body .sport-sidebar .sidebar .nav-item {
+    margin: 0;
+  }
+}
+@media (min-width: 520px) and (max-width: 990px) {
+  body .sport-sidebar .sidebar .nav-item {
+    margin: 0 0.5rem;
+  }
+}
+body .sport-sidebar .sidebar .nav-item:last-of-type {
+  margin-bottom: 0;
+}
+body .sport-sidebar .sidebar .nav-item .nav-link {
+  color: #F2F2F2;
+  font-size: 1.875rem;
+  padding: 0.5rem;
+}
+@media (max-width: 600px) {
+  body .sport-sidebar .sidebar .nav-item .nav-link {
+    font-size: 1.1rem;
+  }
+}
+body .sport-sidebar .sidebar .nav-item .nav-link .sport-name, body .sport-sidebar .sidebar .nav-item .nav-link .badge {
+  display: none;
+}
+body .sport-sidebar .sidebar .nav-item .nav-link .fa-futbol, body .sport-sidebar .sidebar .nav-item .nav-link .fa-basketball-ball, body .sport-sidebar .sidebar .nav-item .nav-link .fa-volleyball-ball, body .sport-sidebar .sidebar .nav-item .nav-link .fa-hockey-puck,
+body .sport-sidebar .sidebar .nav-item .nav-link .fa-chess-knight, body .sport-sidebar .sidebar .nav-item .nav-link .fa-football-ball, body .sport-sidebar .sidebar .nav-item .nav-link .fa-tennis-ball, body .sport-sidebar .sidebar .nav-item .nav-link .fa-headset {
+  display: block;
+}
+body .sport-sidebar .sidebar .nav-item .nav-link .sport-logo-img {
+  display: none;
+}
+body .sport-sidebar .sidebar .nav-item .nav-link.active {
+  background-color: #1DA885;
+  box-shadow: 0 0 10px #198F71;
+  border-radius: 10px !important;
+}
+body .sport-sidebar .sidebar .nav-item .nav-link.active .fa-futbol, body .sport-sidebar .sidebar .nav-item .nav-link.active .fa-basketball-ball, body .sport-sidebar .sidebar .nav-item .nav-link.active .fa-volleyball-ball, body .sport-sidebar .sidebar .nav-item .nav-link.active .fa-hockey-puck,
+body .sport-sidebar .sidebar .nav-item .nav-link.active .fa-chess-knight, body .sport-sidebar .sidebar .nav-item .nav-link.active .fa-football-ball, body .sport-sidebar .sidebar .nav-item .nav-link.active .fa-tennis-ball, body .sport-sidebar .sidebar .nav-item .nav-link.active .fa-headset {
+  display: none;
+}
+body .sport-sidebar .sidebar .nav-item .nav-link.active .sport-logo-img {
+  display: block;
+  height: 30px;
+  width: 30px;
+}
+@media (max-width: 600px) {
+  body .sport-sidebar .sidebar .nav-item .nav-link.active .sport-logo-img {
+    height: 1.1rem;
+    width: 1.1rem;
+  }
+}
+body .sport-sidebar .sidebar.opened {
+  width: 20rem;
+  background-color: rgba(26, 64, 79, 0.9);
+}
+body .sport-sidebar .sidebar.opened .nav-link .sport-name, body .sport-sidebar .sidebar.opened .nav-link .badge {
+  font-size: 20px;
+  color: #F2F2F2;
+  font-weight: 200;
+  display: inline-block;
+}
+body .sport-sidebar .sidebar.opened .nav-link .badge {
+  font-weight: normal;
+  font-size: 1rem;
+}
+body .sport-sidebar .sidebar.opened .nav-link.active .sport-name, body .sport-sidebar .sidebar.opened .nav-link.active .badge {
+  color: #1A404F;
+  font-weight: 500;
+}
+body .main-bet-board {
+  margin-bottom: 2rem;
+}
+body .main-bet-board .main-bet-header {
+  background-image: url(../../assets/img/basketball.png);
+  background-size: cover;
+  border-radius: 20px;
+  padding: 5rem 1rem;
+  box-shadow: 0 3px 6px #010326;
+  margin-bottom: 2rem;
+}
+@media (max-width: 520px) {
+  body .main-bet-board .main-bet-header {
+    padding: 3rem 1rem;
+    margin-bottom: 1rem;
+  }
+}
+body .main-bet-board .main-bet-header .team-name {
+  color: #F2F2F2;
+  font-size: 1rem;
+  background-color: rgba(6, 38, 51, 0.7);
+  width: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  min-height: 4rem;
+}
+body .main-bet-board .main-bet-header .team-name:first-of-type {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+body .main-bet-board .main-bet-header .team-name:last-of-type {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+@media (min-width: 576px) {
+  body .main-bet-board .main-bet-header .team-name:first-of-type {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 0;
+  }
+  body .main-bet-board .main-bet-header .team-name:last-of-type {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0;
+  }
+}
+@media (min-width: 576px) and (max-width: 1024px) {
+  body .main-bet-board .main-bet-header .team-name {
+    font-size: 0.85rem;
+  }
+}
+body .main-bet-board .main-bet-header .team-name.live {
+  border-radius: 10px;
+}
+body .main-bet-board .main-bet-header .date-time {
+  color: #F2F2F2;
+  font-size: 1rem;
+  background-color: rgba(6, 38, 51, 0.7);
+  text-align: center;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  min-height: 6rem;
+}
+@media (min-width: 576px) and (max-width: 1024px) {
+  body .main-bet-board .main-bet-header .date-time {
+    font-size: 0.85rem;
+    padding: 1.5rem 1rem;
+  }
+}
+body .main-bet-board .main-bet-header .game-score {
+  color: #F2F2F2;
+  min-height: 6rem;
+  padding: 2rem;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 576px) and (max-width: 990px) {
+  body .main-bet-board .main-bet-header .game-score {
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+}
+@media (min-width: 990px) and (max-width: 1200px) {
+  body .main-bet-board .main-bet-header .game-score {
+    width: 10rem;
+  }
+}
+body .main-bet-board .main-bet-header .game-score .score-value:nth-child(odd) {
+  background-color: rgba(6, 38, 51, 0.7);
+  padding: 1rem 0.75rem;
+  border-radius: 10px;
+}
+body .main-bet-board .main-bet-header .live-time {
+  display: inline-block;
+  padding: 0.25rem 2rem;
+  color: #21C299;
+  font-size: 1.25rem;
+  border: 1.5px solid #21C299;
+  border-radius: 15px;
+  font-weight: 500;
+}
+body .main-bet-board .main-bet-body .nav-pills .nav-item {
+  width: 45%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  body .main-bet-board .main-bet-body .nav-pills .nav-item {
+    width: 24%;
+  }
+}
+body .main-bet-board .main-bet-body .nav-pills .nav-item .nav-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #045955;
+  box-shadow: 0 3px 6px rgba(1, 3, 38, 0.5);
+  border-radius: 15px;
+  height: 3rem;
+  color: #F2F2F2;
+  padding: 0.5rem;
+}
+body .main-bet-board .main-bet-body .nav-pills .nav-item .nav-link.active {
+  background-color: #21C299;
+}
+@media (max-width: 520px) {
+  body .main-bet-board .main-bet-body .nav-pills .nav-item .nav-link {
+    font-size: 0.85rem;
+  }
+}
+@media (min-width: 990px) and (max-width: 1200px) {
+  body .main-bet-board .main-bet-body .nav-pills .nav-item .nav-link {
+    font-size: 0.75rem;
+  }
+}
+body .main-bet-board .main-bet-body .bet-container {
+  background-color: #1A404F;
+  border-radius: 20px;
+  padding-top: 1rem;
+  box-shadow: 0 3px 6px rgba(1, 3, 38, 0.5);
+}
+body .main-bet-board .main-bet-body .bet-container .bet-btn {
+  background-color: #F2F2F2;
+  border-radius: 15px;
+  text-align: left;
+  color: #083040;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+body .main-bet-board .main-bet-body .bet-container .bet-btn .bet-value {
+  color: #21C299;
+}
+body .main-bet-board .main-bet-body .bet-container .bet-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+@media (min-width: 990px) and (max-width: 1200px) {
+  body .main-bet-board .main-bet-body .bet-container .bet-btn {
+    font-size: 0.75rem;
+  }
+}
+@media (max-width: 990px) {
+  body .bet-slip {
+    padding: 0;
+  }
+}
+body .bet-slip .bet-slip-card {
+  border-radius: 20px;
+  background-color: #1A404F;
+  padding: 1rem;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-header h2 {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-header .nav-tabs {
+  background-color: #062633;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  border-top: 1px solid #1DA885;
+  padding: 0 1rem;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-header .nav-tabs .nav-item .nav-link {
+  border-bottom: 2px solid transparent;
+  color: #1DA885;
+  font-weight: lighter;
+  border-radius: 0;
+  padding: 1rem 0.5rem;
+  font-size: 0.875rem;
+}
+@media (min-width: 1200px) and (max-width: 1290px) {
+  body .bet-slip .bet-slip-card .bet-slip-card-header .nav-tabs .nav-item .nav-link {
+    font-size: 0.785rem;
+    padding: 1rem 0;
+  }
+}
+body .bet-slip .bet-slip-card .bet-slip-card-header .nav-tabs .nav-item .nav-link:hover {
+  border: none;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-header .nav-tabs .nav-item .nav-link.active {
+  background-color: transparent;
+  border-bottom: 2px solid #1DA885;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  font-weight: normal;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body {
+  max-height: 420px;
+  overflow-y: scroll;
+  padding-right: 5px;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+  position: absolute;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body::-webkit-scrollbar-thumb {
+  background-color: #21C299;
+  border-radius: 10px;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket {
+  background-color: #F2F2F2;
+  border-radius: 15px;
+  padding: 1rem;
+  box-shadow: 0 3px 6px #198F71;
+  margin-bottom: 1rem;
+  position: relative;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket:last-of-type {
+  margin-bottom: 0;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .close {
+  top: 0;
+  right: 0.5rem;
+  color: #198F71;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .teams-logo {
+  margin-bottom: 0.2rem;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .teams-logo .team-logo-item {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #CDCBCB;
+  text-align: center;
+  background-color: #fff;
+  margin-right: 0.5rem;
+  padding-top: 2px;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .teams-logo .team-logo-item .team-logo-img {
+  width: 20px;
+  height: 20px;
+  vertical-align: top;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .teams-logo .team-name {
+  color: #1A404F;
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .teams-logo.host-team .team-name {
+  font-weight: lighter;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .teams-logo.guest-team {
+  margin-bottom: 1rem;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .price {
+  margin-bottom: 1rem;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .price .selected-team {
+  color: #1A404F;
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .price .selected-bet {
+  border-radius: 15px;
+  background-color: #1DA885;
+  padding: 0 1rem;
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .stakeWin .form-control {
+  border-color: #1DA885;
+  border-radius: 15px;
+  height: auto;
+  padding: 0.2rem 0.7rem;
+  color: #1A404F;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .stakeWin .form-control::placeholder {
+  color: #CDCBCB;
+  text-align: center;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .stakeWin .form-control:focus {
+  box-shadow: none;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .stakeWin .form-control.stake {
+  margin-right: 0.5rem;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .tab-content .tab-pane .bet-slip-ticket .stakeWin .form-control.win {
+  margin-left: 0.5rem;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .bet-slip-card-body-background {
+  color: #F2F2F2;
+  font-size: 1.1rem;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-body .bet-slip-card-body-background p:first-of-type {
+  color: #21C299;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-footer {
+  padding: 1.5rem 1rem 0 1rem;
+  border-top: 1px solid #21C299;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-footer .total, body .bet-slip .bet-slip-card .bet-slip-card-footer .amount {
+  font-size: 1.1rem;
+}
+body .bet-slip .bet-slip-card .bet-slip-card-footer .place-bet {
+  color: #21C299;
+  font-size: 1.5rem;
+  padding: 0.5rem 3rem;
+  background-color: #062633;
+  box-shadow: 0 3px 6px #010326;
+  border-radius: 20px;
+  width: 100%;
+}
+@media (min-width: 990px) and (max-width: 1024px) {
+  body .bet-slip .bet-slip-card .bet-slip-card-footer .place-bet {
+    padding: 0.5rem 2rem;
+    font-size: 1.3rem;
+  }
+}
+@media (min-width: 1200px) and (max-width: 1370px) {
+  body .bet-slip .bet-slip-card .bet-slip-card-footer .place-bet {
+    padding: 0.5rem 2rem;
+    font-size: 1.3rem;
+  }
+}
+body .bet-slip .bet-slip-card .bet-slip-card-footer .place-bet:focus {
+  box-shadow: none;
+}
+body .btn-bet-slip, body .btn-bet-slip:focus {
+  width: 12rem;
+  height: 4rem;
+  left: calc(50% - 5rem);
+  padding: 0 28px;
+  background-color: #21C299;
+  border-radius: 10px 10px 0 0;
+  color: #1A404F;
+  font-weight: 600;
+  font-size: 1.2rem;
+  box-shadow: 0 3px 6px #21C299;
+  outline: none;
+}
+@media (min-width: 990px) {
+  body .btn-bet-slip, body .btn-bet-slip:focus {
+    display: none;
+  }
+}
+body .btn-bet-slip .badge-light, body .btn-bet-slip:focus .badge-light {
+  margin-left: 0.2rem;
+  background-color: #1A404F;
+  color: #F2F2F2;
+}
+body footer {
+  margin: 0 -3rem 0.5rem -3rem;
+  border-top: 1px solid #21C299;
+  border-bottom: 1px solid #21C299;
+}
+@media (max-width: 767px) {
+  body footer {
+    margin: 0 -0.5rem 0.5rem -0.5rem;
+  }
+}
+body footer .nav {
+  border-top: 1px solid #21C299;
+  border-bottom: 1px solid #21C299;
+  margin: 0.3rem 0;
+}
+body footer .nav .nav-item .nav-link {
+  color: #F2F2F2;
+}
+
+/*# sourceMappingURL=style.css.map */
