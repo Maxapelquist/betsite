@@ -152,5 +152,62 @@ def logout():
     session.clear()
     return redirect(url_for('profile'))
 
+@app.route('/analysis')
+def analysis():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    # Top Bets
+    cursor.execute("""
+        SELECT e.EventName, COUNT(b.BetID) AS BetCount
+        FROM Bets b
+        JOIN Events e ON b.EventID = e.EventID
+        GROUP BY b.EventID
+        ORDER BY BetCount DESC
+        LIMIT 5
+    """)
+    top_bets = cursor.fetchall()
+
+    # User Betting Statistics
+    if 'logged_in' in session:
+        user_id = session['user_id']
+        cursor.execute("""
+            SELECT COUNT(BetID) AS TotalBets,
+                   SUM(CASE WHEN BetResult = 'Win' THEN 1 ELSE 0 END) AS Wins,
+                   SUM(BetAmount) AS TotalBetAmount,
+                   SUM(CASE WHEN BetResult = 'Win' THEN BetAmount * BetOdds ELSE 0 END) AS TotalWon
+            FROM Bets
+            WHERE UserID = %s
+        """, (user_id,))
+        user_stats = cursor.fetchone()
+        user_stats['WinRate'] = (user_stats['Wins'] / user_stats['TotalBets']) * 100 if user_stats['TotalBets'] > 0 else 0
+    else:
+        user_stats = None
+
+    # Total Bets per Sport Type
+    cursor.execute("""
+        SELECT e.SportType, COUNT(b.BetID) AS BetCount
+        FROM Bets b
+        JOIN Events e ON b.EventID = e.EventID
+        GROUP BY e.SportType
+        ORDER BY BetCount DESC
+    """)
+    bets_per_sport = cursor.fetchall()
+
+    # Popular Events
+    cursor.execute("""
+        SELECT e.EventName, COUNT(b.BetID) AS BetCount
+        FROM Bets b
+        JOIN Events e ON b.EventID = e.EventID
+        GROUP BY b.EventID
+        ORDER BY BetCount DESC
+        LIMIT 5
+    """)
+    popular_events = cursor.fetchall()
+
+    conn.close()
+    return render_template('analysis.html', top_bets=top_bets, user_stats=user_stats, bets_per_sport=bets_per_sport, popular_events=popular_events)
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5000)

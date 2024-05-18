@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/fontawesome-pro-5.12.0-web/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcnd.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='fonts/fontawesome-pro-5.12.0-web/js/all.js') }}" async></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" class="brand-logo">
+        </a>
+        <button type="button" class="btn btn-search ml-auto" data-toggle="modal" data-target="#searchModal">
+            <i class="fas fa-search"></i>
+        </button>
+        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog"
+             aria-labelledby="searchModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2 w-100" type="text" placeholder="Search">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+            <div class="d-flex flex-column flex-lg-row align-items-end align-items-lg-center">
+                <ul class="navbar-nav text-right order-md-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="{{ url_for('profile') }}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="{{ url_for('analysis') }}">Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="{{ url_for('home') }}">Betting</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8 col-xl-9 px-0">
+            <div class="bookmaker-board">
+                {% if user_stats %}
+                <div class="container mt-4 p-3 betting-history-container">
+                    <h2 class="text-white">Your Betting Statistics</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="text-white">Total Bets: <span class="font-weight-bold">{{ user_stats.TotalBets }}</span></p>
+                            <p class="text-white">Total Wins: <span class="font-weight-bold">{{ user_stats.Wins }}</span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-white">Total Bet Amount: <span class="font-weight-bold">{{ user_stats.TotalBetAmount }}</span></p>
+                            <p class="text-white">Total Winnings: <span class="font-weight-bold">{{ user_stats.TotalWon }}</span></p>
+                            <p class="text-white">Win Rate: <span class="font-weight-bold">{{ user_stats.WinRate }}%</span></p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8 col-xl-9 px-0">
+            <div class="bookmaker-board">
+                <div class="container mt-4 p-3 betting-history-container">
+                    <h2 class="text-white">Total Bets per Sport Type</h2>
+                    <ul class="text-white">
+                        {% for sport in bets_per_sport %}
+                        <li>{{ sport.SportType }} - <span class="font-weight-bold">{{ sport.BetCount }} bets</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8 col-xl-9 px-0">
+            <div class="bookmaker-board">
+                <div class="container mt-4 p-3 betting-history-container">
+                    <h2 class="text-white">Top 5 Popular Events</h2>
+                    <ul class="text-white">
+                        {% for event in popular_events %}
+                        <li>{{ event.EventName }} - <span class="font-weight-bold">{{ event.BetCount }} bets</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

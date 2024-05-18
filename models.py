@@ -25,33 +25,6 @@ class Event(Base):
     SportType = Column(String(255), nullable=False)
     Status = Column(Enum('Open', 'Closed'), nullable=False)
 
-class Team(Base):from sqlalchemy import create_engine, Column, Integer, String, DECIMAL, Date, Enum, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-import random
-from faker import Faker
-
-Base = declarative_base()
-faker = Faker()
-
-class User(Base):
-    __tablename__ = 'Users'
-    UserID = Column(Integer, primary_key=True, autoincrement=True)
-    LegalName = Column(String(255), nullable=False)
-    Username = Column(String(255), nullable=False)
-    Password = Column(String(255), nullable=False)
-    Email = Column(String(255), nullable=False)
-    Address = Column(String(255), nullable=False)
-    Balance = Column(DECIMAL(10, 2), nullable=False, default=0.00)
-
-class Event(Base):
-    __tablename__ = 'Events'
-    EventID = Column(Integer, primary_key=True, autoincrement=True)
-    EventName = Column(String(255), nullable=False)
-    EventDate = Column(Date, nullable=False)
-    SportType = Column(String(255), nullable=False)
-    Status = Column(Enum('Open', 'Closed'), nullable=False)
-
 class Team(Base):
     __tablename__ = 'Teams'
     TeamID = Column(Integer, primary_key=True, autoincrement=True)
