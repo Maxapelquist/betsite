@@ -4,12 +4,18 @@ from datetime import datetime
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Sätt en säker nyckel för sessionshantering
 
+
 def get_db_connection():
+    with open('db_config.txt', 'r') as f:
+        lines = f.readlines()
+        password = lines[0].strip()
+        database = lines[1].strip()
+
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='Filip2003',
-        database='bet_databases'
+        password=password,
+        database=database
     )
     return conn
 
