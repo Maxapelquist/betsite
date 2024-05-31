@@ -1,15 +1,21 @@
 import mysql.connector
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, flash
-
+from datetime import datetime
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Sätt en säker nyckel för sessionshantering
 
+
 def get_db_connection():
+    with open('db_config.txt', 'r') as f:
+        lines = f.readlines()
+        password = lines[0].strip()
+        database = lines[1].strip()
+
     conn = mysql.connector.connect(
         host='localhost',
         user='root',
         password='Wow,FuturePhd#0807RoychikHere',
-        database='bet_database'
+        database='bet_database',
     )
     return conn
 
@@ -77,19 +83,72 @@ def home():
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM Users WHERE Username = %s AND Password = %s", (username, password))
-        user = cursor.fetchone()
-        conn.close()
-        if user:
-            session['logged_in'] = True
-            session['user_id'] = user['UserID']
-            return redirect(url_for('profile'))
+        if 'user_id' not in session:
+            # User is trying to log in
+            username = request.form['username']
+            password = request.form['password']
+            conn = get_db_connection()
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM Users WHERE Username = %s AND Password = %s", (username, password))
+            user = cursor.fetchone()
+            conn.close()
+            if user:
+                session['logged_in'] = True
+                session['user_id'] = user['UserID']
+                return redirect(url_for('profile'))
+            else:
+                flash("Incorrect username or password. Please try again.")
+                return redirect(url_for('profile'))
         else:
-            flash("Incorrect username or password. Please try again.")
+            user_id = session['user_id']
+            conn = get_db_connection()
+            cursor = conn.cursor(dictionary=True)
+
+            # Determine the type of form submission
+            form_type = request.form.get('form_type')
+
+            if form_type == 'credit_card':
+                # User is updating credit card information
+                card_number = request.form.get('card_number')
+                expiry_date = request.form.get('expiry_date')
+                cvv = request.form.get('cvv')
+
+                cursor.execute("SELECT * FROM CreditCards WHERE UserID = %s", (user_id,))
+                credit_card = cursor.fetchone()
+                # Fetch all results to clear the cursor
+                cursor.fetchall()
+                if credit_card:
+                    cursor.execute("""
+                        UPDATE CreditCards
+                        SET CardNumber = %s, ExpiryDate = %s, CVV = %s
+                        WHERE UserID = %s
+                    """, (card_number, expiry_date, cvv, user_id))
+                else:
+                    cursor.execute("""
+                        INSERT INTO CreditCards (CardNumber, ExpiryDate, CVV, UserID)
+                        VALUES (%s, %s, %s, %s)
+                    """, (card_number, expiry_date, cvv, user_id))
+                conn.commit()
+                flash("Credit card information updated successfully.")
+            elif form_type == 'deposit':
+                # User is depositing money
+                amount = float(request.form.get('amount'))
+                cursor.execute("UPDATE Users SET Balance = Balance + %s WHERE UserID = %s", (amount, user_id))
+                conn.commit()
+                flash("Money deposited successfully.")
+            elif form_type == 'withdraw':
+                # User is withdrawing money
+                amount = float(request.form.get('amount'))
+                cursor.execute("SELECT Balance FROM Users WHERE UserID = %s", (user_id,))
+                balance = cursor.fetchone()['Balance']
+                if balance >= amount:
+                    cursor.execute("UPDATE Users SET Balance = Balance - %s WHERE UserID = %s", (amount, user_id))
+                    conn.commit()
+                    flash("Money withdrawn successfully.")
+                else:
+                    flash("Insufficient balance.")
+
+            conn.close()
             return redirect(url_for('profile'))
 
     if 'logged_in' in session:
@@ -98,6 +157,8 @@ def profile():
         cursor = conn.cursor(dictionary=True)
         cursor.execute("SELECT * FROM Users WHERE UserID = %s", (user_id,))
         user = cursor.fetchone()
+        # Fetch all results to clear the cursor
+        cursor.fetchall()
         cursor.execute("""
             SELECT e.EventName, b.BetAmount, b.BetOdds, b.BetResult
             FROM Bets b
@@ -105,10 +166,13 @@ def profile():
             WHERE b.UserID = %s
         """, (user_id,))
         betting_history = cursor.fetchall()
+        cursor.execute("SELECT * FROM CreditCards WHERE UserID = %s", (user_id,))
+        credit_card = cursor.fetchone()
         conn.close()
-        return render_template('profile.html', user=user, betting_history=betting_history)
+        return render_template('profile.html', user=user, betting_history=betting_history, credit_card=credit_card)
 
     return render_template('profile.html')
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -262,7 +326,64 @@ def team_details(team_name):
 
     conn.close()
     return render_template('team_details.html', team=team_details, players=players, events=events)
-#>>>>>>> ada6b2086f7196bbf7bacb6b277473973675d8e3
+
+@app.route('/analysis')
+def analysis():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    # Top Bets
+    cursor.execute("""
+        SELECT e.EventName, COUNT(b.BetID) AS BetCount
+        FROM Bets b
+        JOIN Events e ON b.EventID = e.EventID
+        GROUP BY b.EventID
+        ORDER BY BetCount DESC
+        LIMIT 5
+    """)
+    top_bets = cursor.fetchall()
+
+    # User Betting Statistics
+    if 'logged_in' in session:
+        user_id = session['user_id']
+        cursor.execute("""
+            SELECT COUNT(BetID) AS TotalBets,
+                   SUM(CASE WHEN BetResult = 'Win' THEN 1 ELSE 0 END) AS Wins,
+                   SUM(BetAmount) AS TotalBetAmount,
+                   SUM(CASE WHEN BetResult = 'Win' THEN BetAmount * BetOdds ELSE 0 END) AS TotalWon
+            FROM Bets
+            WHERE UserID = %s
+        """, (user_id,))
+        user_stats = cursor.fetchone()
+        user_stats['WinRate'] = (user_stats['Wins'] / user_stats['TotalBets']) * 100 if user_stats['TotalBets'] > 0 else 0
+    else:
+        user_stats = None
+
+    # Total Bets per Sport Type
+    cursor.execute("""
+        SELECT e.SportType, COUNT(b.BetID) AS BetCount
+        FROM Bets b
+        JOIN Events e ON b.EventID = e.EventID
+        GROUP BY e.SportType
+        ORDER BY BetCount DESC
+    """)
+    bets_per_sport = cursor.fetchall()
+
+    # Popular Events
+    cursor.execute("""
+        SELECT e.EventName, COUNT(b.BetID) AS BetCount
+        FROM Bets b
+        JOIN Events e ON b.EventID = e.EventID
+        GROUP BY b.EventID
+        ORDER BY BetCount DESC
+        LIMIT 5
+    """)
+    popular_events = cursor.fetchall()
+
+    conn.close()
+    return render_template('analysis.html', top_bets=top_bets, user_stats=user_stats, bets_per_sport=bets_per_sport, popular_events=popular_events)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5000)

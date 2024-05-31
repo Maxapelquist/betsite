@@ -26,6 +26,7 @@ class Event(Base):
     Status = Column(Enum('Open', 'Closed'), nullable=False)
 
 
+
 Base = declarative_base()
 faker = Faker()
 

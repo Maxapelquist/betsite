@@ -5,7 +5,6 @@ from faker import Faker
 import hashlib
 from models import Base, User, Event, Team, EventTeam, Bet, EventOdds, TransactionHistory, Player, CreditCard
 
-faker = Faker()
 
 def generate_data(session):
     for _ in range(10):
@@ -99,6 +98,7 @@ def generate_data(session):
 
     session.commit()
     print("All data has been successfully inserted.")
+faker = Faker()
 
 def main():
     engine = create_engine('mysql+mysqlconnector://root:Wow,FuturePhd#0807RoychikHere@localhost/bet_database')

@@ -22,6 +22,54 @@
             crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='fonts/fontawesome-pro-5.12.0-web/js/all.js') }}" async></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <style>
+        .nav-link img {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+        }
+        .nav-link.active img {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            filter: none;
+        }
+        .form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+        .profile-info-container, .betting-history .table-row {
+            background-color: #2a2a2a;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        .bet-slip-card, .bookmaker-board {
+            background-color: #333;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .bet-slip-card-header, .bookmaker-board-header {
+            border-bottom: 1px solid #444;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+        }
+        .bet-slip-card-header h2, .bookmaker-board-header h2 {
+            color: #fff;
+            font-size: 18px;
+            margin: 0;
+        }
+        .bet-slip-card-body, .bookmaker-board-body {
+            color: #fff;
+        }
+        .betting-history .date-time-container p,
+        .betting-history .playing-teams p,
+        .betting-history .simple-bet p,
+        .betting-history .text-center p {
+            color: #fff !important;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -32,8 +80,7 @@
         <button type="button" class="btn btn-search ml-auto" data-toggle="modal" data-target="#searchModal">
             <i class="fas fa-search"></i>
         </button>
-        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog"
-             aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form class="form-inline my-2 my-lg-0">
@@ -42,8 +89,7 @@
                 </div>
             </div>
         </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent"
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,62 +113,155 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-12 col-lg-8 col-xl-9 px-0">
+        <!-- Profile Information -->
+        {% if session.logged_in %}
+        <div class="col-lg-4 offset-lg-0 col-xl-3 d-none d-lg-block">
             <div class="bookmaker-board">
-                <div class="betting-history-container">
-                    {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                    <div class="alert alert-danger mt-3">
-                        {{ messages[0] }}
-                    </div>
-                    {% endif %}
-                    {% endwith %}
-                    {% if session.logged_in %}
-                    <h1 class="mt-5 text-white">My Profile</h1>
-                    <div class="profile-info-container mb-5" style="background-color: #2a2a2a; border-radius: 5px; padding: 15px;">
-                        <div class="profile-info text-white">
-                            <p><strong>Name:</strong> {{ user.LegalName }}</p>
-                            <p><strong>Username:</strong> {{ user.Username }}</p>
-                            <p><strong>Email:</strong> {{ user.Email }}</p>
-                            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
-                        </div>
-                    </div>
-                    <div class="betting-history mt-5">
-                        <h2>
-                            <a class="nav-link text-uppercase" href="{{ url_for('betting_history') }}" style="color: white; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">betting history</a>
-                        </h2>                                                                     
-                        <!-- {% for bet in betting_history %}
-                        <div class="table-row d-flex justify-content-between align-items-center mb-2 p-2" style="background-color: #2a2a2a; border-radius: 5px;">
-                            <div>
-                                <p class="text-white mb-0"><strong>Event:</strong> {{ bet.EventName }}</p>
-                                <p class="text-white mb-0"><strong>Date/Time:</strong> {{ bet.EventDate }}</p>
-                                <p class="text-white mb-0"><strong>Bet Amount:</strong> {{ bet.BetAmount }}</p>
-                                <p class="text-white mb-0"><strong>Odds:</strong> {{ bet.BetOdds }}</p>
-                                <p class="text-white mb-0"><strong>Result:</strong> {{ bet.BetResult }}</p>
+                <div class="bookmaker-board-header">
+                    <h2 class="text-uppercase">profile information</h2>
+                </div>
+                <div class="bookmaker-board-body">
+                    <div class="profile-info text-white">
+                        <p><strong>Name:</strong> {{ user.LegalName }}</p>
+                        <p><strong>Username:</strong> {{ user.Username }}</p>
+                        <p><strong>Email:</strong> {{ user.Email }}</p>
+                        <p><strong>Balance:</strong> {{ user.Balance }} EUR</p>
+                        <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                        <hr>
+                        <h3>Credit Card Information</h3>
+                        <form method="post" action="{{ url_for('profile') }}">
+                            <input type="hidden" name="form_type" value="credit_card">
+                            <div class="form-group">
+                                <label for="card_number" class="text-white">Card Number</label>
+                                <input type="text" class="form-control" id="card_number" name="card_number" value="{{ credit_card.CardNumber if credit_card else '' }}" required>
                             </div>
-                        </div>
-                        {% endfor %} -->
+                            <div class="form-group">
+                                <label for="expiry_date" class="text-white">Expiry Date (YYYY-MM-DD)</label>
+                                <input type="date" class="form-control" id="expiry_date" name="expiry_date" value="{{ credit_card.ExpiryDate if credit_card else '' }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv" class="text-white">CVV</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv" value="{{ credit_card.CVV if credit_card else '' }}" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                        <hr>
+                        <h3>Manage Balance</h3>
+                        <form method="post" action="{{ url_for('profile') }}">
+                            <div class="form-group">
+                                <label for="amount" class="text-white">Amount (EUR)</label>
+                                <input type="number" class="form-control" id="amount" name="amount" step="0.01" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="form_type" value="deposit">Deposit</button>
+                            <button type="submit" class="btn btn-primary" name="form_type" value="withdraw">Withdraw</button>
+                        </form>
                     </div>
-                    {% else %}
-                    <h1 class="mt-5 text-white">Login</h1>
-                    <form method="post" action="{{ url_for('profile') }}">
-                        <div class="form-group">
-                            <label for="username" class="text-white">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="text-white">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </form>
-                    <p class="mt-3 text-white">Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
-                    {% endif %}
                 </div>
             </div>
+        </div>
+        {% endif %}
+
+        <!-- Betting History -->
+        <div class="col-12 col-lg-8 col-xl-9 px-0">
+            {% if session.logged_in %}
+            <div class="bookmaker-board betting-history">
+                <ul class="nav nav-pills mb-1" id="history-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-history-tab" data-toggle="pill" href="{{ url_for('betting_history') }}" role="tab"
+                           aria-controls="pills-history" aria-selected="true">Betting History</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="history-tabContent">
+                    <div class="tab-pane fade show active" id="pills-history" role="tabpanel" aria-labelledby="pills-history-tab">
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <div class="alert alert-danger mt-3">
+                            {{ messages[0] }}
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th class="date-time-container">Date/Time</th>
+                                    <th class="playing-teams">Event</th>
+                                    <th class="text-center">Bet Amount</th>
+                                    <th class="text-center">Odds</th>
+                                    <th class="text-center">Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for bet in betting_history %}
+                                <tr>
+                                    <td class="date-time-container">
+                                        <p class="time">{{ bet.EventDate }}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="score">
+                                            <p class="team-name text-left">{{ bet.EventName }}</p>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <p class="text-center">{{ bet.BetAmount }} EUR</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p class="text-center">{{ bet.BetOdds }}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p class="text-center">{{ bet.BetResult }}</p>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="bookmaker-board">
+                <h1 class="mt-5 text-white">Login</h1>
+                <form method="post" action="{{ url_for('profile') }}">
+                    <div class="form-group">
+                        <label for="username" class="text-white">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="text-white">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p class="mt-3 text-white">Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
 
+<footer>
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link text-uppercase" href="#">how it works</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-uppercase" href="#">about us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-uppercase" href="#">contact us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-uppercase" href="#">privacy policy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-uppercase" href="#">log in</a>
+        </li>
+    </ul>
+</footer>
+<script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // JavaScript code for profile and betting history can be added here
+    });
+</script>
 </body>
 </html>
