@@ -25,11 +25,6 @@ class Event(Base):
     SportType = Column(String(255), nullable=False)
     Status = Column(Enum('Open', 'Closed'), nullable=False)
 
-# class Team(Base):from sqlalchemy import create_engine, Column, Integer, String, DECIMAL, Date, Enum, ForeignKey
-# from sqlalchemy.ext.declarative import declarative_base
-# from sqlalchemy.orm import sessionmaker
-# import random
-# from faker import Faker
 
 Base = declarative_base()
 faker = Faker()
