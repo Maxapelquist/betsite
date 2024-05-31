@@ -159,10 +159,3 @@ class CreditCard(Base):
     CardNumber = Column(String(19), nullable=False)
     ExpiryDate = Column(Date, nullable=False)
     CVV = Column(String(3), nullable=False)
-
-class FootballEvent(Base):
-    __tablename__ = 'FootballEvent'
-    EventID = Column(Integer, ForeignKey('Events.EventID'), primary_key=True)
-    NoYellowCards = Column(Integer, nullable=False, default=0)
-    RedCards = Column(Integer, nullable=False, default=0)
-    Corners = Column(Integer, nullable=False, default=0)

@@ -78,31 +78,13 @@
                     {% endif %}
                     {% endwith %}
                     {% if session.logged_in %}
-                    <h1 class="mt-5 text-white">My Profile</h1>
-                    <div class="profile-info-container mb-5" style="background-color: #2a2a2a; border-radius: 5px; padding: 15px;">
-                        <div class="profile-info text-white">
-                            <p><strong>Name:</strong> {{ user.LegalName }}</p>
-                            <p><strong>Username:</strong> {{ user.Username }}</p>
-                            <p><strong>Email:</strong> {{ user.Email }}</p>
-                            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
-                        </div>
-                    </div>
-                    <div class="betting-history mt-5">
-                        <h2>
-                            <a class="nav-link text-uppercase" href="{{ url_for('betting_history') }}" style="color: white; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">betting history</a>
-                        </h2>                                                                     
-                        <!-- {% for bet in betting_history %}
-                        <div class="table-row d-flex justify-content-between align-items-center mb-2 p-2" style="background-color: #2a2a2a; border-radius: 5px;">
-                            <div>
-                                <p class="text-white mb-0"><strong>Event:</strong> {{ bet.EventName }}</p>
-                                <p class="text-white mb-0"><strong>Date/Time:</strong> {{ bet.EventDate }}</p>
-                                <p class="text-white mb-0"><strong>Bet Amount:</strong> {{ bet.BetAmount }}</p>
-                                <p class="text-white mb-0"><strong>Odds:</strong> {{ bet.BetOdds }}</p>
-                                <p class="text-white mb-0"><strong>Result:</strong> {{ bet.BetResult }}</p>
-                            </div>
-                        </div>
-                        {% endfor %} -->
-                    </div>
+                    <h1 class="mt-5 text-white">My History</h1>
+                    <div class="mt-3">
+                        <button type="button" class="btn btn-secondary mr-2">Best</button>
+                        <button type="button" class="btn btn-secondary mr-2">Worst</button>
+                        <button type="button" class="btn btn-secondary mr-2">Win</button>
+                        <button type="button" class="btn btn-secondary mr-2">Loss</button>
+                    </div>                    
                     {% else %}
                     <h1 class="mt-5 text-white">Login</h1>
                     <form method="post" action="{{ url_for('profile') }}">
