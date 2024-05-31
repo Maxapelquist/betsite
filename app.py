@@ -7,8 +7,8 @@ app.secret_key = 'supersecretkey'  # Sätt en säker nyckel för sessionshanteri
 def get_db_connection():
     conn = mysql.connector.connect(
         host='localhost',
-        user='root',
-        password='Rust=cohle26',
+        user='root'
+        password='pass',
         database='bet_database'
     )
     return conn
