@@ -32,7 +32,7 @@
             display: inline-block;
             width: 24px;
             height: 24px;
-            filter: none;
+            filter: none.
         }
         .form-control:focus {
             border-color: #80bdff;
@@ -125,7 +125,36 @@
                         <p><strong>Name:</strong> {{ user.LegalName }}</p>
                         <p><strong>Username:</strong> {{ user.Username }}</p>
                         <p><strong>Email:</strong> {{ user.Email }}</p>
+                        <p><strong>Balance:</strong> {{ user.Balance }} EUR</p>
                         <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                        <hr>
+                        <h3>Credit Card Information</h3>
+                        <form method="post" action="{{ url_for('profile') }}">
+                            <input type="hidden" name="form_type" value="credit_card">
+                            <div class="form-group">
+                                <label for="card_number" class="text-white">Card Number</label>
+                                <input type="text" class="form-control" id="card_number" name="card_number" value="{{ credit_card.CardNumber if credit_card else '' }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="expiry_date" class="text-white">Expiry Date (YYYY-MM-DD)</label>
+                                <input type="date" class="form-control" id="expiry_date" name="expiry_date" value="{{ credit_card.ExpiryDate if credit_card else '' }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv" class="text-white">CVV</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv" value="{{ credit_card.CVV if credit_card else '' }}" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                        <hr>
+                        <h3>Manage Balance</h3>
+                        <form method="post" action="{{ url_for('profile') }}">
+                            <div class="form-group">
+                                <label for="amount" class="text-white">Amount (EUR)</label>
+                                <input type="number" class="form-control" id="amount" name="amount" step="0.01" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="form_type" value="deposit">Deposit</button>
+                            <button type="submit" class="btn btn-primary" name="form_type" value="withdraw">Withdraw</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -236,3 +265,4 @@
 </script>
 </body>
 </html>
+
