@@ -101,7 +101,11 @@ def generate_data(session):
 faker = Faker()
 
 def main():
-    engine = create_engine('mysql+mysqlconnector://root:password@localhost/bet_database')
+    with open('db_config.txt', 'r') as f:
+        lines = f.readlines()
+        password = lines[0].strip()
+        database = lines[1].strip()
+    engine = create_engine(f'mysql+mysqlconnector://root:{password}@localhost/{database}')
     Base.metadata.drop_all(engine)  # Caution: This will drop all tables!
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
