@@ -36,15 +36,15 @@ body header .navbar {
 body header .navbar .navbar-brand .brand-logo {
   max-width: 200px;
 }
-.nav-link img {
+.nav-link img, .nav-link.active img {
     display: inline-block;
     width: 24px;
     height: 24px;
+    visibility: visible; /* Ensure images are visible */
 }
+
 .nav-link.active img {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
+    filter: none; /* Ensure no filter applied */
 }
 
 @media (max-width: 540px) {

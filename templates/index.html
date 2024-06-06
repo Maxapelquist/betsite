@@ -96,7 +96,7 @@
                            role="tab"
                            aria-controls="pills-soccer" aria-selected="true">
                             <i class="fad fa-futbol"></i>
-                            <img src="{{ url_for('static', filename='img/icons/soccer.svg.png') }}" alt="soccer" class="sport-logo-img">
+                            <img src="{{ url_for('static', filename='img/soccer.svg') }}" alt="soccer" class="sport-logo-img">
                         </a>
                     </li>
                     <li class="nav-item">
@@ -432,6 +432,14 @@
 </footer>
 <script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
 <script>
+$(document).ready(function(){
+    $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+        let target = $(e.target).attr("href"); // activated tab
+        $(target).find('img.sport-logo-img').css('visibility', 'visible'); // Ensure images are visible
+    });
+});
+
+
 document.addEventListener('DOMContentLoaded', function () {
     let selectedBets = [];
 
