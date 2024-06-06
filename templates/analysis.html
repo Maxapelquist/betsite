@@ -92,24 +92,7 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-8 col-xl-9 px-0">
-            <div class="bookmaker-board">
-                <div class="container mt-4 p-3 betting-history-container">
-                    <h2 class="text-white">Total Bets per Sport Type</h2>
-                    <ul class="text-white">
-                        {% for sport in bets_per_sport %}
-                        <li>{{ sport.SportType }} - <span class="font-weight-bold">{{ sport.BetCount }} bets</span></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8 col-xl-9 px-0">
             <div class="bookmaker-board">
@@ -124,7 +107,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 </body>
 </html>

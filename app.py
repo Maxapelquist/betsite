@@ -357,29 +357,8 @@ def analysis():
     else:
         user_stats = None
 
-    # Total Bets per Sport Type
-    cursor.execute("""
-        SELECT e.SportType, COUNT(b.BetID) AS BetCount
-        FROM Bets b
-        JOIN Events e ON b.EventID = e.EventID
-        GROUP BY e.SportType
-        ORDER BY BetCount DESC
-    """)
-    bets_per_sport = cursor.fetchall()
-
-    # Popular Events
-    cursor.execute("""
-        SELECT e.EventName, COUNT(b.BetID) AS BetCount
-        FROM Bets b
-        JOIN Events e ON b.EventID = e.EventID
-        GROUP BY b.EventID
-        ORDER BY BetCount DESC
-        LIMIT 5
-    """)
-    popular_events = cursor.fetchall()
-
     conn.close()
-    return render_template('analysis.html', top_bets=top_bets, user_stats=user_stats, bets_per_sport=bets_per_sport, popular_events=popular_events)
+    return render_template('analysis.html', top_bets=top_bets, user_stats=user_stats)
 
 
 @app.route('/stats')
@@ -432,9 +411,18 @@ def stats():
     """)
     loser_teams = cursor.fetchall()
 
+    cursor.execute("""
+        SELECT e.EventName, COUNT(b.BetID) AS BetCount
+        FROM Bets b
+        JOIN Events e ON b.EventID = e.EventID
+        GROUP BY b.EventID
+        ORDER BY BetCount DESC
+        LIMIT 5
+    """)
+    popular_events = cursor.fetchall()
+
     conn.close()
-    # return render_template('stats.html', highest_betters=highest_betters, highest_bet_amount=highest_bet_amount, winner_teams=winner_teams, frequent_betters=frequent_betters, loser_teams=loser_teams)
-    return render_template('stats.html', highest_betters=highest_betters, highest_bet_amount=highest_bet_amount, winner_teams=winner_teams, frequent_betters=frequent_betters, loser_teams=loser_teams)
+    return render_template('stats.html', highest_betters=highest_betters, highest_bet_amount=highest_bet_amount, winner_teams=winner_teams, frequent_betters=frequent_betters, loser_teams=loser_teams, popular_events=popular_events, bets_per_sport=bets_per_sport)
 
 
 if __name__ == '__main__':

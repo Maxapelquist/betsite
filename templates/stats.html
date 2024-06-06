@@ -152,5 +152,22 @@
     </div>
 </div>
 
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8 col-xl-9 px-0">
+            <div class="bookmaker-board">
+                <div class="container mt-4 p-3 betting-history-container">
+                    <h2 class="text-white">Top 5 Popular Events</h2>
+                    <ul class="text-white">
+                        {% for event in popular_events %}
+                        <li>{{ event.EventName }} - <span class="font-weight-bold">{{ event.BetCount }} bets</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
