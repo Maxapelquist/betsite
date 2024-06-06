@@ -382,8 +382,8 @@ def analysis():
     return render_template('analysis.html', top_bets=top_bets, user_stats=user_stats, bets_per_sport=bets_per_sport, popular_events=popular_events)
 
 
-@app.route('/global')
-def global_stats():
+@app.route('/stats')
+def stats():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
