@@ -422,7 +422,7 @@ def stats():
     popular_events = cursor.fetchall()
 
     conn.close()
-    return render_template('stats.html', highest_betters=highest_betters, highest_bet_amount=highest_bet_amount, winner_teams=winner_teams, frequent_betters=frequent_betters, loser_teams=loser_teams, popular_events=popular_events, bets_per_sport=bets_per_sport)
+    return render_template('stats.html', highest_betters=highest_betters, highest_bet_amount=highest_bet_amount, winner_teams=winner_teams, frequent_betters=frequent_betters, loser_teams=loser_teams, popular_events=popular_events)
 
 
 if __name__ == '__main__':
