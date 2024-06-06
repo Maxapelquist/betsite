@@ -265,7 +265,6 @@ def teams():
     teams = cursor.fetchall()
     conn.close()
     return render_template('teams.html', teams=teams)
-
 @app.route('/teams/<team_name>')
 def team_details(team_name):
     conn = get_db_connection()
@@ -296,7 +295,8 @@ def team_details(team_name):
             eo2.OddsValue AS Odds_X,
             eo3.OddsValue AS Odds_2,
             eo4.OddsValue AS Odds_OVER,
-            eo5.OddsValue AS Odds_UNDER
+            eo5.OddsValue AS Odds_UNDER,
+            e.WinningTeamID
         FROM Events e
         JOIN EventTeams et1 ON e.EventID = et1.EventID
         JOIN Teams t1 ON et1.TeamID = t1.TeamID
@@ -313,16 +313,14 @@ def team_details(team_name):
     cursor.execute(query, (team_details['TeamID'], team_details['TeamID']))
     events = cursor.fetchall()
 
-    # Filter events to ensure only one record per event and always in the format Host vs Guest
-    unique_events = {}
+    # Determine the result for each event
     for event in events:
-        event_key = tuple(sorted([event['HostTeam'], event['GuestTeam']]))
-        if event_key not in unique_events:
-            unique_events[event_key] = event
-        elif event['EventDate'] < unique_events[event_key]['EventDate']:
-            unique_events[event_key] = event
-
-    events = list(unique_events.values())
+        if event['WinningTeamID'] is None:
+            event['Result'] = 'D'
+        elif event['WinningTeamID'] == team_details['TeamID']:
+            event['Result'] = 'W'
+        else:
+            event['Result'] = 'L'
 
     conn.close()
     return render_template('team_details.html', team=team_details, players=players, events=events)
@@ -383,6 +381,60 @@ def analysis():
     conn.close()
     return render_template('analysis.html', top_bets=top_bets, user_stats=user_stats, bets_per_sport=bets_per_sport, popular_events=popular_events)
 
+
+@app.route('/global')
+def global_stats():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT u.Username
+        FROM Users u
+        JOIN Bets b ON u.UserID = b.UserID
+        WHERE b.BetAmount = (SELECT MAX(BetAmount) FROM Bets)
+    """)
+    highest_betters = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT bets.BetAmount
+        FROM Bets
+        WHERE BetAmount = (SELECT MAX(BetAmount) FROM Bets)
+    """)
+    highest_bet_amount = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT t.TeamName
+        FROM Events e
+        JOIN Teams t ON e.WinningTeamID = t.TeamID
+        GROUP BY t.TeamID, t.TeamName
+        ORDER BY COUNT(e.EventID) DESC
+        LIMIT 3
+    """)
+    winner_teams = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT u.UserID, u.Username, COUNT(b.BetID) AS BetCount
+        FROM Bets b
+        JOIN Users u ON b.UserID = u.UserID
+        GROUP BY u.UserID, u.Username
+        ORDER BY BetCount DESC
+        LIMIT 3
+    """)
+    frequent_betters = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT t.TeamName
+        FROM Events e
+        JOIN Teams t ON e.WinningTeamID = t.TeamID
+        GROUP BY t.TeamID, t.TeamName
+        ORDER BY COUNT(e.EventID) ASC
+        LIMIT 1
+    """)
+    loser_teams = cursor.fetchall()
+
+    conn.close()
+    # return render_template('stats.html', highest_betters=highest_betters, highest_bet_amount=highest_bet_amount, winner_teams=winner_teams, frequent_betters=frequent_betters, loser_teams=loser_teams)
+    return render_template('stats.html', highest_betters=highest_betters, highest_bet_amount=highest_bet_amount, winner_teams=winner_teams, frequent_betters=frequent_betters, loser_teams=loser_teams)
 
 
 if __name__ == '__main__':

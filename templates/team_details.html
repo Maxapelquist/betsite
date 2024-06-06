@@ -14,6 +14,7 @@
             font-family: Arial, sans-serif;
             background-color: #1c1c1c;
             color: #fff;
+            overflow: auto;
         }
         .container {
             background-color: transparent;
@@ -76,6 +77,7 @@
                 {% for event in events %}
                 <li class="list-group-item">
                     {{ event.HostTeam }} vs {{ event.GuestTeam }} - {{ event.EventDate.strftime('%Y-%m-%d') }}<br>
+                    Result: {{ event.Result }}
                 </li>
                 {% endfor %}
             </ul>
@@ -83,11 +85,6 @@
     </div>
 </div>
 
-<footer class="footer mt-auto py-3">
-    <div class="container text-center">
-        <span class="text-muted"></span>
-    </div>
-</footer>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
