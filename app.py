@@ -265,7 +265,6 @@ def teams():
     teams = cursor.fetchall()
     conn.close()
     return render_template('teams.html', teams=teams)
-
 @app.route('/teams/<team_name>')
 def team_details(team_name):
     conn = get_db_connection()
@@ -296,7 +295,8 @@ def team_details(team_name):
             eo2.OddsValue AS Odds_X,
             eo3.OddsValue AS Odds_2,
             eo4.OddsValue AS Odds_OVER,
-            eo5.OddsValue AS Odds_UNDER
+            eo5.OddsValue AS Odds_UNDER,
+            e.WinningTeamID
         FROM Events e
         JOIN EventTeams et1 ON e.EventID = et1.EventID
         JOIN Teams t1 ON et1.TeamID = t1.TeamID
@@ -313,16 +313,14 @@ def team_details(team_name):
     cursor.execute(query, (team_details['TeamID'], team_details['TeamID']))
     events = cursor.fetchall()
 
-    # Filter events to ensure only one record per event and always in the format Host vs Guest
-    unique_events = {}
+    # Determine the result for each event
     for event in events:
-        event_key = tuple(sorted([event['HostTeam'], event['GuestTeam']]))
-        if event_key not in unique_events:
-            unique_events[event_key] = event
-        elif event['EventDate'] < unique_events[event_key]['EventDate']:
-            unique_events[event_key] = event
-
-    events = list(unique_events.values())
+        if event['WinningTeamID'] is None:
+            event['Result'] = 'D'
+        elif event['WinningTeamID'] == team_details['TeamID']:
+            event['Result'] = 'W'
+        else:
+            event['Result'] = 'L'
 
     conn.close()
     return render_template('team_details.html', team=team_details, players=players, events=events)

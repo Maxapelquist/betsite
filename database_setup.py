@@ -53,6 +53,8 @@ def generate_data(session):
                 TeamID=team_id
             )
             session.add(event_team)
+        winning_team = random.choice([team_ids[0], team_ids[1], None])
+        event.WinningTeamID = winning_team
 
     for event in events:
         for odds_type in ['1', 'X', '2', 'Over', 'Under']:

@@ -47,6 +47,7 @@ class Event(Base):
     EventDate = Column(Date, nullable=False)
     SportType = Column(String(255), nullable=False)
     Status = Column(Enum('Open', 'Closed'), nullable=False)
+    WinningTeamID = Column(Integer, ForeignKey('Teams.TeamID'), nullable=True)
 
 class Team(Base):
     __tablename__ = 'Teams'
@@ -70,6 +71,7 @@ class Bet(Base):
     BetType = Column(Enum('1x2', 'Over/Under'), nullable=False)
     BetOdds = Column(DECIMAL(5, 2), nullable=False)
     BetResult = Column(Enum('Win', 'Loss', 'Pending'), nullable=False)
+
 
 class EventOdds(Base):
     __tablename__ = 'EventOdds'

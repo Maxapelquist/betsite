@@ -76,6 +76,7 @@
                 {% for event in events %}
                 <li class="list-group-item">
                     {{ event.HostTeam }} vs {{ event.GuestTeam }} - {{ event.EventDate.strftime('%Y-%m-%d') }}<br>
+                    Result: {{ event.Result }}
                 </li>
                 {% endfor %}
             </ul>
