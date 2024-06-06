@@ -382,6 +382,60 @@ def analysis():
     return render_template('analysis.html', top_bets=top_bets, user_stats=user_stats, bets_per_sport=bets_per_sport, popular_events=popular_events)
 
 
+@app.route('/global')
+def global_stats():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT u.Username
+        FROM Users u
+        JOIN Bets b ON u.UserID = b.UserID
+        WHERE b.BetAmount = (SELECT MAX(BetAmount) FROM Bets)
+    """)
+    highest_betters = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT bets.BetAmount
+        FROM Bets
+        WHERE BetAmount = (SELECT MAX(BetAmount) FROM Bets)
+    """)
+    highest_bet_amount = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT t.TeamName
+        FROM Events e
+        JOIN Teams t ON e.WinningTeamID = t.TeamID
+        GROUP BY t.TeamID, t.TeamName
+        ORDER BY COUNT(e.EventID) DESC
+        LIMIT 3
+    """)
+    winner_teams = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT u.UserID, u.Username, COUNT(b.BetID) AS BetCount
+        FROM Bets b
+        JOIN Users u ON b.UserID = u.UserID
+        GROUP BY u.UserID, u.Username
+        ORDER BY BetCount DESC
+        LIMIT 3
+    """)
+    frequent_betters = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT t.TeamName
+        FROM Events e
+        JOIN Teams t ON e.WinningTeamID = t.TeamID
+        GROUP BY t.TeamID, t.TeamName
+        ORDER BY COUNT(e.EventID) ASC
+        LIMIT 1
+    """)
+    loser_teams = cursor.fetchall()
+
+    conn.close()
+    # return render_template('stats.html', highest_betters=highest_betters, highest_bet_amount=highest_bet_amount, winner_teams=winner_teams, frequent_betters=frequent_betters, loser_teams=loser_teams)
+    return render_template('stats.html', highest_betters=highest_betters, highest_bet_amount=highest_bet_amount, winner_teams=winner_teams, frequent_betters=frequent_betters, loser_teams=loser_teams)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5000)
