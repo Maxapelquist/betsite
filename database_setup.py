@@ -1,13 +1,19 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData, text
 from sqlalchemy.orm import sessionmaker
 import random
 from faker import Faker
 import hashlib
 from models import Base, User, Event, Team, EventTeam, Bet, EventOdds, TransactionHistory, Player, CreditCard
 
+users_count = 100
+team_count = 30
+event_count = 300
+bet_count = users_count * event_count * 100
+faker = Faker()
+
 
 def generate_data(session):
-    for _ in range(10):
+    for _ in range(users_count):
         user = User(
             LegalName=faker.name(),
             Username=faker.user_name(),
@@ -20,17 +26,17 @@ def generate_data(session):
 
     session.commit()  # Ensure users are committed to generate UserIDs
 
-    for _ in range(5):
+    for _ in range(team_count):
         team = Team(
             TeamName=faker.company(),
-            SportType=random.choice(['Football', 'Basketball', 'Tennis']),
+            SportType=random.choice(['Football']),
             TeamLogoURL=faker.image_url()
         )
         session.add(team)
 
     session.commit()  # Ensure teams are committed to generate TeamIDs
 
-    for _ in range(10):
+    for _ in range(event_count):
         event = Event(
             EventName=f"{faker.company()} vs {faker.company()}",
             EventDate=faker.date_between(start_date='-30d', end_date='today'),
@@ -65,7 +71,7 @@ def generate_data(session):
             )
             session.add(event_odd)
 
-    for _ in range(20):
+    for _ in range(bet_count):
         bet = Bet(
             UserID=random.choice(users).UserID,
             EventID=random.choice(events).EventID,
@@ -100,7 +106,7 @@ def generate_data(session):
 
     session.commit()
     print("All data has been successfully inserted.")
-faker = Faker()
+
 
 def main():
     with open('db_config.txt', 'r') as f:
@@ -108,11 +114,30 @@ def main():
         password = lines[0].strip()
         database = lines[1].strip()
     engine = create_engine(f'mysql+mysqlconnector://root:{password}@localhost/{database}')
-    Base.metadata.drop_all(engine)  # Caution: This will drop all tables!
+
+    # Create a MetaData instance
+    meta = MetaData()
+
+    # Reflect the existing database into the MetaData
+    meta.reflect(bind=engine)
+
+    # Drop all foreign key constraints and tables
+    with engine.connect() as connection:
+        connection.execute(text("SET FOREIGN_KEY_CHECKS=0"))
+        for table in reversed(meta.sorted_tables):
+            connection.execute(text(f"DROP TABLE IF EXISTS {table.name}"))
+        connection.execute(text("SET FOREIGN_KEY_CHECKS=1"))
+
+    # Now drop all tables
+    Base.metadata.drop_all(engine)
+
+    # Recreate all tables
     Base.metadata.create_all(engine)
+
     Session = sessionmaker(bind=engine)
     session = Session()
     generate_data(session)
+
 
 if __name__ == "__main__":
     main()
