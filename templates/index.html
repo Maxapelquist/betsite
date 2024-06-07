@@ -38,27 +38,6 @@
             border-color: #80bdff;
             box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
         }
-        .side-image {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            width: 200px;
-            background: no-repeat center center;
-            background-size: contain;
-            z-index: -1;
-        }
-        .left-side-image {
-            left: 0;
-            background-image: url('{{ url_for('static', filename='img/gettherizz.png') }}');
-        }
-        .right-side-image {
-            right: 0;
-            background-image: url('{{ url_for('static', filename='img/gettherizz.png') }}');
-        }
-        .main-content {
-            margin-left: 200px;
-            margin-right: 200px;
-        }
     </style>
 </head>
 <body>
@@ -109,137 +88,132 @@
     </nav>
 </header>
 
-<div class="left-side-image side-image"></div>
-<div class="right-side-image side-image"></div>
+<div class="container-fluid">
+    <div class="row">
+        <!--        Bookmaker board-->
+        <div class="col-12 col-lg-8 col-xl-9 px-0">
+            <div class="bookmaker-board">
+                <ul class="nav nav-pills mb-1" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-soccer-tab" data-toggle="pill" href="#pills-soccer"
+                           role="tab"
+                           aria-controls="pills-soccer" aria-selected="true">
+                            <i class="fad fa-futbol"></i>
+                            <img src="{{ url_for('static', filename='img/soccer.svg') }}" alt="soccer" class="sport-logo-img">
+                        </a>
+                    </li>
 
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <!--        Bookmaker board-->
-            <div class="col-12 col-lg-8 col-xl-9 px-0">
-                <div class="bookmaker-board">
-                    <ul class="nav nav-pills mb-1" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="pills-soccer-tab" data-toggle="pill" href="#pills-soccer"
-                               role="tab"
-                               aria-controls="pills-soccer" aria-selected="true">
-                                <i class="fad fa-futbol"></i>
-                                <img src="{{ url_for('static', filename='img/soccer.svg') }}" alt="soccer" class="sport-logo-img">
-                            </a>
-                        </li>
-
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-soccer" role="tabpanel" aria-labelledby="pills-soccer-tab">
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th class="date-time-container">Date/Time</th>
-                                        <th class="logos">Logos</th>
-                                        <th class="playing-teams">Playing Teams</th>
-                                        <th class="text-center">1X</th>
-                                        <th class="text-center">X</th>
-                                        <th class="text-center">2X</th>
-                                        <th class="over text-center">OVER</th>
-                                        <th class="under text-center">UNDER</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for event in events %}
-                                    <tr data-event-id="{{ event.EventID }}">
-                                        <td class="date-time-container">
-                                            <p class="time">{{ event.EventDate }}</p>
-                                        </td>
-                                        <td class="logos">
-                                            <div class="teams-logo">
-                                                <div class="team-logo-item host-team">
-                                                    <img src="{{ url_for('static', filename='img/FC_Chelsea_Logo.svg.png') }}" alt="team-logo" class="team-logo-img"/>
-                                                </div>
-                                                <div class="team-logo-item guest-team">
-                                                    <img src="{{ url_for('static', filename='img/Tottenham_Hotspur.svg') }}" alt="team-logo" class="team-logo-img"/>
-                                                </div>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-soccer" role="tabpanel" aria-labelledby="pills-soccer-tab">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th class="date-time-container">Date/Time</th>
+                                    <th class="logos">Logos</th>
+                                    <th class="playing-teams">Playing Teams</th>
+                                    <th class="text-center">1X</th>
+                                    <th class="text-center">X</th>
+                                    <th class="text-center">2X</th>
+                                    <th class="over text-center">OVER</th>
+                                    <th class="under text-center">UNDER</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for event in events %}
+                                <tr data-event-id="{{ event.EventID }}">
+                                    <td class="date-time-container">
+                                        <p class="time">{{ event.EventDate }}</p>
+                                    </td>
+                                    <td class="logos">
+                                        <div class="teams-logo">
+                                            <div class="team-logo-item host-team">
+                                                <img src="{{ url_for('static', filename='img/FC_Chelsea_Logo.svg.png') }}" alt="team-logo" class="team-logo-img"/>
                                             </div>
-                                        </td>
-                                        <td class="playing-teams d-flex justify-content-between">
-                                            <div class="score">
-                                                <p class="team-name text-left">{{ event.HostTeam }}</p>
-                                                <p class="team-name winner mb-0 text-left">{{ event.GuestTeam }}</p>
+                                            <div class="team-logo-item guest-team">
+                                                <img src="{{ url_for('static', filename='img/Tottenham_Hotspur.svg') }}" alt="team-logo" class="team-logo-img"/>
                                             </div>
-                                        </td>
-                                        <td class="simple-bet">
-                                            {% if event.Odds_1 is defined %}
-                                            <button type="button" class="btn btn-price odds-button" data-odd="{{ event.Odds_1 }}"> {{ event.Odds_1 }}</button>
-                                            {% endif %}
-                                        </td>
+                                        </div>
+                                    </td>
+                                    <td class="playing-teams d-flex justify-content-between">
+                                        <div class="score">
+                                            <p class="team-name text-left">{{ event.HostTeam }}</p>
+                                            <p class="team-name winner mb-0 text-left">{{ event.GuestTeam }}</p>
+                                        </div>
+                                    </td>
+                                    <td class="simple-bet">
+                                        {% if event.Odds_1 is defined %}
+                                        <button type="button" class="btn btn-price odds-button" data-odd="{{ event.Odds_1 }}"> {{ event.Odds_1 }}</button>
+                                        {% endif %}
+                                    </td>
 
-                                        <td class="simple-bet">
-                                            {% if event.Odds_X is defined %}
-                                            <button type="button" class="btn btn-price odds-button" data-odd="{{ event.Odds_X }}"> {{ event.Odds_X }}</button>
-                                            {% endif %}
-                                        </td>
+                                    <td class="simple-bet">
+                                        {% if event.Odds_X is defined %}
+                                        <button type="button" class="btn btn-price odds-button" data-odd="{{ event.Odds_X }}"> {{ event.Odds_X }}</button>
+                                        {% endif %}
+                                    </td>
 
-                                        <td class="simple-bet">
-                                            {% if event.Odds_2 is defined %}
-                                            <button type="button" class="btn btn-price odds-button" data-odd="{{ event.Odds_2 }}"> {{ event.Odds_2 }}</button>
-                                            {% endif %}
-                                        </td>
+                                    <td class="simple-bet">
+                                        {% if event.Odds_2 is defined %}
+                                        <button type="button" class="btn btn-price odds-button" data-odd="{{ event.Odds_2 }}"> {{ event.Odds_2 }}</button>
+                                        {% endif %}
+                                    </td>
 
-                                        <td class="over">
-                                            {% if event.Odds_OVER is defined %}
-                                            <button type="button" class="btn btn-price odds-button" data-odd="{{ event.Odds_OVER }}"> {{ event.Odds_OVER }}</button>
-                                            {% endif %}
-                                        </td>
+                                    <td class="over">
+                                        {% if event.Odds_OVER is defined %}
+                                        <button type="button" class="btn btn-price odds-button" data-odd="{{ event.Odds_OVER }}"> {{ event.Odds_OVER }}</button>
+                                        {% endif %}
+                                    </td>
 
-                                        <td class="under">
-                                            {% if event.Odds_UNDER is defined %}
-                                            <button type="button" class="btn btn-price odds-button" data-odd="{{ event.Odds_UNDER }}"> {{ event.Odds_UNDER }}</button>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-
-
+                                    <td class="under">
+                                        {% if event.Odds_UNDER is defined %}
+                                        <button type="button" class="btn btn-price odds-button" data-odd="{{ event.Odds_UNDER }}"> {{ event.Odds_UNDER }}</button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
+
+
                 </div>
             </div>
+        </div>
 
-            <!--        Bet Slip-->
-            <div class="bet-slip col-lg-4 offset-lg-0 col-xl-3 d-none d-lg-block">
-                <div class="bet-slip-card">
-                    <div class="bet-slip-card-header">
-                        <h2 class="text-uppercase">bet slip</h2>
-                        <ul class="nav nav-tabs" id="betSlipTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active text-uppercase" id="singles-tab" data-toggle="tab" href="#singles"
-                                   role="tab"
-                                   aria-controls="singles" aria-selected="true">singles</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bet-slip-card-body">
-                        <div class="tab-content" id="betSlipContent">
-                            <div class="tab-pane fade show active position-relative" id="singles" role="tabpanel"
-                                 aria-labelledby="singles-tab">
-                                <!-- Bets will be dynamically inserted here -->
-                            </div>
+        <!--        Bet Slip-->
+        <div class="bet-slip col-lg-4 offset-lg-0 col-xl-3 d-none d-lg-block">
+            <div class="bet-slip-card">
+                <div class="bet-slip-card-header">
+                    <h2 class="text-uppercase">bet slip</h2>
+                    <ul class="nav nav-tabs" id="betSlipTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active text-uppercase" id="singles-tab" data-toggle="tab" href="#singles"
+                               role="tab"
+                               aria-controls="singles" aria-selected="true">singles</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bet-slip-card-body">
+                    <div class="tab-content" id="betSlipContent">
+                        <div class="tab-pane fade show active position-relative" id="singles" role="tabpanel"
+                             aria-labelledby="singles-tab">
+                            <!-- Bets will be dynamically inserted here -->
                         </div>
                     </div>
-                    <div class="bet-slip-card-footer">
-                        <div class="d-flex justify-content-between">
-                            <p class="total">Total Stake</p>
-                            <p class="amount">EUR <span id="total-stake">0.00</span></p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p class="total">Total Win</p>
-                            <p class="amount">EUR <span id="total-win">0.00"></span></p>
-                        </div>
-                        <button type="submit" class="btn place-bet text-uppercase d-block mx-auto" id="placeBetBtn">
-                            place bet
-                        </button>
+                </div>
+                <div class="bet-slip-card-footer">
+                    <div class="d-flex justify-content-between">
+                        <p class="total">Total Stake</p>
+                        <p class="amount">EUR <span id="total-stake">0.00</span></p>
                     </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="total">Total Win</p>
+                        <p class="amount">EUR <span id="total-win">0.00"></span></p>
+                    </div>
+                    <button type="submit" class="btn place-bet text-uppercase d-block mx-auto" id="placeBetBtn">
+                        place bet
+                    </button>
                 </div>
             </div>
         </div>
